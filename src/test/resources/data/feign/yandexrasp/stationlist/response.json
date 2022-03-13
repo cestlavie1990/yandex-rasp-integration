@@ -1,0 +1,43 @@
+{
+  "countries": [
+    {
+      "codes": {
+        "esr_code": "esr_code_l225",
+        "yandex_code": "l225"
+      },
+      "title": "Russia",
+      "regions": [
+        {
+          "codes": {
+            "esr_code": "esr_code_r10174",
+            "yandex_code": "r10174"
+          },
+          "title": "St. Petersburg and Leningrad Region",
+          "settlements": [
+            {
+              "codes": {
+                "esr_code": "esr_code_c2",
+                "yandex_code": "c2"
+              },
+              "title": "St. Petersburg",
+              "stations": [
+                {
+                  "codes": {
+                    "esr_code": "esr_code_s9600366",
+                    "yandex_code": "s9600366"
+                  },
+                  "title": "LED",
+                  "direction": "direction_s9600366",
+                  "station_type": "airport",
+                  "transport_type": "plane",
+                  "latitude": 59.799489,
+                  "longitude": 30.271525
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
