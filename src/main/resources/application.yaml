@@ -1,0 +1,41 @@
+logging:
+  level:
+    root: INFO
+
+spring:
+  application:
+    name: "yandex-rasp-integration"
+
+  datasource:
+    url: "jdbc:h2:mem:rasp"
+    username: "rasp"
+    password: "rasp"
+    driverClassName: "org.h2.Driver"
+
+  jpa:
+    database-platform: "org.hibernate.dialect.H2Dialect"
+    properties:
+      query:
+        in_clause_parameter_padding: true
+
+  flyway:
+    locations:
+      - "classpath:db/migration"
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+        loggerLevel: full
+
+app:
+  feign:
+    client:
+      yandex:
+        rasp:
+          api-key: "068629a9-008b-4e06-ac1b-7f16d4122dae"
+          url: "https://api.rasp.yandex.net/v3.0"
+          connect-timeout: 5000
+          read-timeout: 5000

@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: DEBUG
+
+app:
+  feign:
+    client:
+      yandex:
+        rasp:
+          api-key: "secret-key"
+          url: "http://localhost:${wiremock.server.port}"
+          connect-timeout: 5000
+          read-timeout: 5000

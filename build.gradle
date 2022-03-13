@@ -1,0 +1,71 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
+}
+
+ext {
+    javaVersion = '17' as Object
+    springCloudVersion = '2021.0.1' as Object
+    restAssuredVersion = '4.5.1'
+    lombokVersion = '1.18.22'
+    okhttpVersion = '4.9.3'
+}
+
+group = 'com.minakov'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = project.ext.javaVersion
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'io.github.openfeign:feign-okhttp'
+    implementation('io.github.openfeign:feign-okhttp') {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    implementation 'io.github.openfeign:feign-jackson'
+    implementation "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${project.ext.okhttpVersion}"
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    runtimeOnly 'com.h2database:h2'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor "org.projectlombok:lombok:${project.ext.lombokVersion}"
+
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    testAnnotationProcessor "org.projectlombok:lombok:${project.ext.lombokVersion}"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock'
+    testImplementation("io.rest-assured:rest-assured:${project.ext.restAssuredVersion}") {
+        exclude group: 'com.sun.xml.bind', module: 'jaxb-osgi'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${project.ext.springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
