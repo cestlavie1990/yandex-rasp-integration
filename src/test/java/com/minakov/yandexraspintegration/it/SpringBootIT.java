@@ -28,7 +28,7 @@ import org.springframework.test.context.ActiveProfiles;
 @Documented
 @ActiveProfiles
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public @interface SpringBootIt {
+public @interface SpringBootIT {
     @AliasFor(annotation = ActiveProfiles.class, attribute = "profiles") String[] activeProfiles() default {"it"};
 
     @AliasFor(annotation = SpringBootTest.class, attribute = "properties") String[] properties() default {};

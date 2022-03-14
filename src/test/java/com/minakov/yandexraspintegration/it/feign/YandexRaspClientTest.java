@@ -8,14 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.minakov.yandexraspintegration.feign.YandexRaspClient;
 import com.minakov.yandexraspintegration.it.AbstractIT;
-import com.minakov.yandexraspintegration.it.SpringBootIt;
+import com.minakov.yandexraspintegration.it.SpringBootIT;
 import com.minakov.yandexraspintegration.util.TestUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 
-@SpringBootIt
+@SpringBootIT
 class YandexRaspClientTest extends AbstractIT {
     @Value("classpath:data/feign/yandexrasp/stationlist/response.json")
     private Resource responseResource;
