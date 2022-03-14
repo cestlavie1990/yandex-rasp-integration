@@ -34,7 +34,7 @@ class YandexRaspClientTest extends AbstractIT {
                                 .withStatus(200)));
 
         {
-            final var response = client.getStationList("ass", "ru_RU", "json");
+            final var response = client.getStationList("api_key", "ru_RU", "json");
 
             assertEquals(1, response.getCountries().size());
 

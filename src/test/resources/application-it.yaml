@@ -7,7 +7,7 @@ app:
     client:
       yandex:
         rasp:
-          api-key: "secret-key"
+          api-key: "${YANDEX_RASP_KEY}"
           url: "http://localhost:${wiremock.server.port}"
           connect-timeout: 5000
           read-timeout: 5000
