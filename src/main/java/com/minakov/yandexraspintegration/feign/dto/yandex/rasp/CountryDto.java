@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,19 +9,11 @@ import lombok.NonNull;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Station {
+public class CountryDto {
     @NonNull
-    private Code codes;
+    private CodeDto codes;
     @NonNull
     private String title;
     @NonNull
-    private String direction;
-    @NonNull
-    private String stationType;
-    @NonNull
-    private String transportType;
-    @NonNull
-    private Double latitude;
-    @NonNull
-    private Double longitude;
+    private List<RegionDto> regions;
 }

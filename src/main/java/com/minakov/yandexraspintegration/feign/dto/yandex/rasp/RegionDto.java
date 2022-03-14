@@ -9,11 +9,11 @@ import lombok.NonNull;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Settlement {
+public class RegionDto {
     @NonNull
-    private Code codes;
+    private CodeDto codes;
     @NonNull
     private String title;
     @NonNull
-    private List<Station> stations;
+    private List<SettlementDto> settlements;
 }

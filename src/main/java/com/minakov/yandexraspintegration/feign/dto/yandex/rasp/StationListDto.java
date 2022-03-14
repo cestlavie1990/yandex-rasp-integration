@@ -1,16 +1,15 @@
 package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
+import lombok.NonNull;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Code {
-    @Nullable
-    private String esrCode;
-    @Nullable
-    private String yandexCode;
+public class StationListDto {
+    @NonNull
+    private List<CountryDto> countries;
 }

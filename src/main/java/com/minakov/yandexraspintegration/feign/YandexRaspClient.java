@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.feign;
 
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.StationListResponse;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.StationListDto;
 import lombok.NonNull;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ public interface YandexRaspClient {
     String DEFAULT_JSON = "json";
 
     @GetMapping(value = "stations_list", consumes = MediaType.APPLICATION_JSON_VALUE)
-    StationListResponse getStationList(@RequestHeader(AUTH_HEADER) @NonNull String auth,
+    StationListDto getStationList(@RequestHeader(AUTH_HEADER) @NonNull String auth,
             @RequestParam(name = "lang", required = false, defaultValue = DEFAULT_LANG) String lang,
             @RequestParam(name = "format", required = false, defaultValue = DEFAULT_JSON) String json);
 }
