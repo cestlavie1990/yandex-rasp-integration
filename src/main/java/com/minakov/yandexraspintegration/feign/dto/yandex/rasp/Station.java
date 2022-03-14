@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.dto.feign.yandex.rasp;
+package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

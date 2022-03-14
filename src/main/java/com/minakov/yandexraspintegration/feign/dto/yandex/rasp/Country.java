@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.dto.feign.yandex.rasp;
+package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,11 @@ import lombok.NonNull;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class StationListResponse {
+public class Country {
     @NonNull
-    private List<Country> countries;
+    private Code codes;
+    @NonNull
+    private String title;
+    @NonNull
+    private List<Region> regions;
 }
