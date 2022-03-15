@@ -1,9 +1,11 @@
 package com.minakov.yandexraspintegration.model;
 
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,10 +23,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "station")
-public class StationEntity implements JpaEntity<String> {
+public class StationEntity implements JpaEntity<UUID> {
     @Id
+    @GeneratedValue
     @Column(updatable = false)
-    private String id;
+    private UUID id;
 
     @Embedded
     private CodeEmbedded code;
