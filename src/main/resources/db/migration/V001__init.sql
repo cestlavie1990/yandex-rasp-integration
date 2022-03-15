@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS "station";
 CREATE TABLE "station" (
-    "id"             VARCHAR          NOT NULL,
-    "settlement_id"  VARCHAR          NOT NULL,
+    "id"             UUID             NOT NULL,
+    "settlement_id"  UUID             NOT NULL,
     "esr_code"       VARCHAR,
     "yandex_code"    VARCHAR,
     "title"          VARCHAR          NOT NULL,
@@ -13,8 +13,8 @@ CREATE TABLE "station" (
 
 DROP TABLE IF EXISTS "settlement";
 CREATE TABLE "settlement" (
-    "id"          VARCHAR NOT NULL,
-    "region_id"   VARCHAR NOT NULL,
+    "id"          UUID    NOT NULL,
+    "region_id"   UUID    NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
     "title"       VARCHAR NOT NULL
@@ -22,8 +22,8 @@ CREATE TABLE "settlement" (
 
 DROP TABLE IF EXISTS "region";
 CREATE TABLE "region" (
-    "id"          VARCHAR NOT NULL,
-    "country_id"  VARCHAR NOT NULL,
+    "id"          UUID    NOT NULL,
+    "country_id"  UUID    NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
     "title"       VARCHAR NOT NULL
@@ -31,7 +31,7 @@ CREATE TABLE "region" (
 
 DROP TABLE IF EXISTS "country";
 CREATE TABLE "country" (
-    "id"          VARCHAR NOT NULL,
+    "id"          UUID    NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
     "title"       VARCHAR NOT NULL
