@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.repository;
 
+import com.minakov.yandexraspintegration.model.JpaEntity;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.LockModeType;
@@ -10,7 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
 @NoRepositoryBean
-public interface GenericRepository<E, ID> extends Repository<E, ID> {
+public interface GenericRepository<E extends JpaEntity<ID>, ID> extends Repository<E, ID> {
     @NonNull E save(@NonNull E model);
 
     @NonNull List<E> saveAll(@NonNull Iterable<E> entities);
