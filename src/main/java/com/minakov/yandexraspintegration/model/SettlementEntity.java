@@ -26,8 +26,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "station")
-public class StationEntity implements JpaEntity<UUID> {
+@Table(name = "settlement")
+public class SettlementEntity implements JpaEntity<UUID> {
     @Id
     @GeneratedValue
     @Column(updatable = false)
@@ -36,27 +36,12 @@ public class StationEntity implements JpaEntity<UUID> {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "settlement_id", nullable = false)
-    private SettlementEntity settlement;
+    @JoinColumn(name = "region_id", nullable = false)
+    private RegionEntity region;
 
     @Embedded
     private CodeEmbedded code;
 
     @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
-    private String direction;
-
-    @Column(nullable = false)
-    private String stationType;
-
-    @Column(nullable = false)
-    private String transportType;
-
-    @Column(nullable = false)
-    private Double latitude;
-
-    @Column(nullable = false)
-    private Double longitude;
 }
