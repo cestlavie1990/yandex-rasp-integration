@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.minakov.yandexraspintegration.feign.YandexRaspClient;
 import com.minakov.yandexraspintegration.it.AbstractIT;
 import com.minakov.yandexraspintegration.it.SpringBootIT;
-import com.minakov.yandexraspintegration.util.TestUtils;
+import com.minakov.yandexraspintegration.util.TestUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,7 @@ class YandexRaspClientTest extends AbstractIT {
                         .withQueryParam("lang", equalTo("ru_RU"))
                         .withQueryParam("format", equalTo("json"))
                         .willReturn(aResponse().withHeader("Content-Type", "application/json")
-                                .withBody(TestUtils.readResource(responseResource))
+                                .withBody(TestUtil.readResource(responseResource))
                                 .withStatus(200)));
 
         {

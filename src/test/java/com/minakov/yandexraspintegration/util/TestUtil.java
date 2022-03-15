@@ -21,9 +21,8 @@ import lombok.experimental.UtilityClass;
 import org.springframework.core.io.Resource;
 
 @UtilityClass
-public class TestUtils {
-    @NonNull
-    public static String readResource(@NonNull Resource resource) {
+public class TestUtil {
+    public static @NonNull String readResource(@NonNull final Resource resource) {
         try {
             return Files.readString(resource.getFile().toPath());
         } catch (IOException e) {
