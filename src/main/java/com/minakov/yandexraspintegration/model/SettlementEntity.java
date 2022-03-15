@@ -23,11 +23,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode
+@ToString
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "settlement")
-public class SettlementEntity implements JpaEntity<UUID> {
+public class SettlementEntity extends AbstractAuditEntity implements JpaEntity<UUID> {
     @Id
     @GeneratedValue
     @Column(updatable = false)

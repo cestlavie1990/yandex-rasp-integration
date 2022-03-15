@@ -1,6 +1,25 @@
 logging:
   level:
-    root: DEBUG
+    root: INFO
+
+spring:
+  datasource:
+    url: "jdbc:h2:mem:test_rasp"
+    username: "rasp"
+    password: "rasp"
+    driverClassName: "org.h2.Driver"
+
+  jpa:
+    database-platform: "org.hibernate.dialect.H2Dialect"
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+      query:
+        in_clause_parameter_padding: true
+
+  flyway:
+    locations:
+      - "classpath:db/migration"
 
 app:
   feign:

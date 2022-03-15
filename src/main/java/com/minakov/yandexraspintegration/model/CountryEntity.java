@@ -14,16 +14,18 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode
+@ToString
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "country")
-public class CountryEntity implements JpaEntity<UUID> {
+public class CountryEntity extends AbstractAuditEntity implements JpaEntity<UUID> {
     @Id
     @GeneratedValue
     @Column(updatable = false)

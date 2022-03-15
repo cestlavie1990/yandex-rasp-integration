@@ -1,40 +1,48 @@
 DROP TABLE IF EXISTS "station";
 CREATE TABLE "station" (
-    "id"             UUID             NOT NULL,
-    "settlement_id"  UUID             NOT NULL,
+    "id"             UUID                        NOT NULL,
+    "settlement_id"  UUID                        NOT NULL,
     "esr_code"       VARCHAR,
     "yandex_code"    VARCHAR,
-    "title"          VARCHAR          NOT NULL,
-    "station_type"   VARCHAR          NOT NULL,
-    "transport_type" VARCHAR          NOT NULL,
-    "latitude"       DOUBLE PRECISION NOT NULL,
-    "longitude"      DOUBLE PRECISION NOT NULL
+    "title"          VARCHAR                     NOT NULL,
+    "station_type"   VARCHAR                     NOT NULL,
+    "transport_type" VARCHAR                     NOT NULL,
+    "latitude"       DOUBLE PRECISION            NOT NULL,
+    "longitude"      DOUBLE PRECISION            NOT NULL,
+    "created_at"     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "updated_at"     TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
 DROP TABLE IF EXISTS "settlement";
 CREATE TABLE "settlement" (
-    "id"          UUID    NOT NULL,
-    "region_id"   UUID    NOT NULL,
+    "id"          UUID                        NOT NULL,
+    "region_id"   UUID                        NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
-    "title"       VARCHAR NOT NULL
+    "title"       VARCHAR                     NOT NULL,
+    "created_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "updated_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
 DROP TABLE IF EXISTS "region";
 CREATE TABLE "region" (
-    "id"          UUID    NOT NULL,
-    "country_id"  UUID    NOT NULL,
+    "id"          UUID                        NOT NULL,
+    "country_id"  UUID                        NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
-    "title"       VARCHAR NOT NULL
+    "title"       VARCHAR                     NOT NULL,
+    "created_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "updated_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
 DROP TABLE IF EXISTS "country";
 CREATE TABLE "country" (
-    "id"          UUID    NOT NULL,
+    "id"          UUID                        NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
-    "title"       VARCHAR NOT NULL
+    "title"       VARCHAR                     NOT NULL,
+    "created_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    "updated_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL
 );
 
 
