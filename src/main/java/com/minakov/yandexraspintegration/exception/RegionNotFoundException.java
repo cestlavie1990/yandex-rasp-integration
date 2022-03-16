@@ -7,7 +7,7 @@ public class RegionNotFoundException extends ObjectNotFoundException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public RegionNotFoundException(@Nullable final String id) {
+    public RegionNotFoundException(@Nullable final Object id) {
         super("Region not found, id={}", id);
     }
 }

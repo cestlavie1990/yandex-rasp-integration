@@ -7,15 +7,14 @@ import com.minakov.yandexraspintegration.repository.GenericRepository;
 import java.util.UUID;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
 public class CountryTestHelper extends AbstractTestHelper<UUID, CountryEntity> {
-    @Autowired
-    private CountryRepository repository;
+    @NonNull
+    private final CountryRepository repository;
 
     public static String DEFAULT_TITLE = "countryTitle";
     public static CodeEmbedded DEFAULT_CODE =

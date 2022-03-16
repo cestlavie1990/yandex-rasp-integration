@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 public abstract class AbstractTestHelper<ID, E extends IEntity<ID>> {
     @Transactional(readOnly = true)
+    public @NonNull E getEntity(@NonNull final ID id) {
+        return Objects.requireNonNull(get(id, Function.identity()));
+    }
+
+    @Transactional(readOnly = true)
     public @Nullable
     <T> T get(@NonNull final ID id, @NonNull final Function<E, T> mapper) {
         return mapper.apply(getRepository().findById(id).orElseThrow());
