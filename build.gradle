@@ -11,6 +11,7 @@ ext {
     restAssuredVersion = '4.5.1'
     lombokVersion = '1.18.22'
     okhttpVersion = '4.9.3'
+    mapStructVersion = '1.4.2.Final'
 }
 
 group = 'com.minakov'
@@ -29,35 +30,40 @@ repositories {
 }
 
 dependencies {
+    //region spring
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.flywaydb:flyway-core'
+
     implementation 'io.github.openfeign:feign-okhttp'
-    implementation('io.github.openfeign:feign-okhttp') {
-        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
-    }
     implementation 'io.github.openfeign:feign-jackson'
-    implementation "org.projectlombok:lombok:${project.ext.lombokVersion}"
     implementation "com.squareup.okhttp3:okhttp:${project.ext.okhttpVersion}"
+    //end region
 
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
+    //region database
     runtimeOnly 'com.h2database:h2'
+    implementation 'org.flywaydb:flyway-core'
+    //end region
 
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    //region utilities
     annotationProcessor "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${project.ext.mapStructVersion}"
 
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation "org.projectlombok:lombok:${project.ext.lombokVersion}"
+    implementation "org.mapstruct:mapstruct:${project.ext.mapStructVersion}"
+    //end region
 
+    //region test
     testAnnotationProcessor "org.projectlombok:lombok:${project.ext.lombokVersion}"
-
+    testAnnotationProcessor "org.mapstruct:mapstruct-processor:${project.ext.mapStructVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock'
-    testImplementation("io.rest-assured:rest-assured:${project.ext.restAssuredVersion}") {
-        exclude group: 'com.sun.xml.bind', module: 'jaxb-osgi'
-    }
+    testImplementation "io.rest-assured:rest-assured:${project.ext.restAssuredVersion}"
+    //end region
 }
 
 dependencyManagement {

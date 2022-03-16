@@ -1,6 +1,5 @@
 package com.minakov.yandexraspintegration.service.country;
 
-import com.minakov.yandexraspintegration.controller.graphql.type.code.Code;
 import com.minakov.yandexraspintegration.controller.graphql.type.country.Country;
 import com.minakov.yandexraspintegration.exception.CountryNotFoundException;
 import com.minakov.yandexraspintegration.model.CountryEntity;
@@ -33,10 +32,6 @@ public class CountryService extends AbstractEntityService<UUID, Country, Country
 
     @Override
     public @NonNull Function<CountryEntity, Country> getMapper() {
-        return e -> Country.builder()
-                .id(e.getId().toString())
-                .title(e.getTitle())
-                .code(Code.builder().yandexCode(e.getCode().getYandexCode()).esrCode(e.getCode().getEsrCode()).build())
-                .build();
+        return CountryMapper.INSTANCE::toDto;
     }
 }
