@@ -28,7 +28,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "settlement")
-public class SettlementEntity extends AbstractAuditEntity implements JpaEntity<UUID> {
+public class SettlementEntity extends AbstractAuditEntity implements IEntity<UUID> {
     @Id
     @GeneratedValue
     @Column(updatable = false)

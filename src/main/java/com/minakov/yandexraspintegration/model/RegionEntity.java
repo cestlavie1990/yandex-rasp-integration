@@ -28,7 +28,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "region")
-public class RegionEntity extends AbstractAuditEntity implements JpaEntity<UUID> {
+public class RegionEntity extends AbstractAuditEntity implements IEntity<UUID> {
     @Id
     @GeneratedValue
     @Column(updatable = false)

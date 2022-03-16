@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.it.helper;
 
-import com.minakov.yandexraspintegration.model.JpaEntity;
+import com.minakov.yandexraspintegration.model.IEntity;
 import com.minakov.yandexraspintegration.repository.GenericRepository;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import lombok.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractTestHelper<ID, E extends JpaEntity<ID>> {
+public abstract class AbstractTestHelper<ID, E extends IEntity<ID>> {
     @Transactional(readOnly = true)
     public @Nullable
     <T> T get(@NonNull final ID id, @NonNull final Function<E, T> mapper) {
