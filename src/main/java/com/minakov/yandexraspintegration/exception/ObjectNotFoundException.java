@@ -22,7 +22,7 @@ public class ObjectNotFoundException extends AbstractException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public ObjectNotFoundException(@Nullable final String id) {
+    public ObjectNotFoundException(@Nullable final Object id) {
         super("Object not found, id={}", id);
     }
 

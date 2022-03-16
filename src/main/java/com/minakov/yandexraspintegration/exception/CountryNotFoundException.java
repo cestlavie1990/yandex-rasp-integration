@@ -7,7 +7,7 @@ public class CountryNotFoundException extends ObjectNotFoundException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public CountryNotFoundException(@Nullable final String id) {
+    public CountryNotFoundException(@Nullable final Object id) {
         super("Country not found, id={}", id);
     }
 }
