@@ -7,7 +7,7 @@ public class SettlementNotFoundException extends ObjectNotFoundException {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public SettlementNotFoundException(@Nullable final String id) {
+    public SettlementNotFoundException(@Nullable final Object id) {
         super("Settlement not found, id={}", id);
     }
 }
