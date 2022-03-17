@@ -48,25 +48,17 @@ class CountryMapperTest {
 
     @Test
     void toDto_list() {
-        final var entity1 = CountryEntity.builder()
+        final var entity = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .title("test-title1")
-                .code(CodeEmbedded.builder().yandexCode("test-yandex-code1").esrCode("test-esr-code1").build())
-                .build();
-        final var entity2 = CountryEntity.builder()
-                .id(UUID.randomUUID())
-                .title("test-title2")
-                .code(CodeEmbedded.builder().build())
+                .title("test-title")
+                .code(CodeEmbedded.builder().yandexCode("test-yandex-code").esrCode("test-esr-code").build())
                 .build();
 
-        final var dto1 = MAPPER.toDto(entity1);
-        final var dto2 = MAPPER.toDto(entity2);
+        final var dto = MAPPER.toDto(entity);
 
-        final var results = MAPPER.toDto(List.of(entity1, entity2));
+        final var results = MAPPER.toDto(List.of(entity));
 
-        assertEquals(2, results.size());
-
-        assertTrue(results.stream().anyMatch(result -> result.equals(dto1)));
-        assertTrue(results.stream().anyMatch(result -> result.equals(dto2)));
+        assertEquals(1, results.size());
+        assertTrue(results.stream().anyMatch(result -> result.equals(dto)));
     }
 }

@@ -10,22 +10,28 @@ import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import java.util.List;
 import java.util.UUID;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class RegionMapperTest {
     private static final RegionMapper MAPPER = RegionMapper.INSTANCE;
 
-    @Test
-    void toDto_withoutNull() {
-        final var country = CountryEntity.builder()
+    private static CountryEntity COUNTRY;
+
+    @BeforeEach
+    void beforeEach() {
+        COUNTRY = CountryEntity.builder()
                 .id(UUID.randomUUID())
                 .title("country-title")
                 .code(CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build())
                 .build();
+    }
 
+    @Test
+    void toDto_withoutNull() {
         final var entity = RegionEntity.builder()
                 .id(UUID.randomUUID())
-                .country(country)
+                .country(COUNTRY)
                 .title("region-title")
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
@@ -41,15 +47,9 @@ class RegionMapperTest {
 
     @Test
     void toDto_withNull() {
-        final var country = CountryEntity.builder()
-                .id(UUID.randomUUID())
-                .title("country-title")
-                .code(CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build())
-                .build();
-
         final var entity = RegionEntity.builder()
                 .id(UUID.randomUUID())
-                .country(country)
+                .country(COUNTRY)
                 .title("region-title")
                 .code(CodeEmbedded.builder().build())
                 .build();
@@ -65,38 +65,18 @@ class RegionMapperTest {
 
     @Test
     void toDto_list() {
-        final var country1 = CountryEntity.builder()
+        final var entity = RegionEntity.builder()
                 .id(UUID.randomUUID())
-                .title("country-title1")
-                .code(CodeEmbedded.builder().yandexCode("country-yandex-code1").esrCode("country-esr-code1").build())
-                .build();
-        final var country2 = CountryEntity.builder()
-                .id(UUID.randomUUID())
-                .title("country-title2")
-                .code(CodeEmbedded.builder().yandexCode("country-yandex-code2").esrCode("country-esr-code2").build())
+                .country(COUNTRY)
+                .title("region-title")
+                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
 
-        final var entity1 = RegionEntity.builder()
-                .id(UUID.randomUUID())
-                .country(country1)
-                .title("region-title1")
-                .code(CodeEmbedded.builder().yandexCode("region-yandex-code1").esrCode("region-esr-code1").build())
-                .build();
-        final var entity2 = RegionEntity.builder()
-                .id(UUID.randomUUID())
-                .country(country2)
-                .title("region-title2")
-                .code(CodeEmbedded.builder().yandexCode("region-yandex-code2").esrCode("region-esr-code2").build())
-                .build();
+        final var dto = MAPPER.toDto(entity);
 
-        final var dto1 = MAPPER.toDto(entity1);
-        final var dto2 = MAPPER.toDto(entity2);
+        final var results = MAPPER.toDto(List.of(entity));
 
-        final var results = MAPPER.toDto(List.of(entity1, entity2));
-
-        assertEquals(2, results.size());
-
-        assertTrue(results.stream().anyMatch(result -> result.equals(dto1)));
-        assertTrue(results.stream().anyMatch(result -> result.equals(dto2)));
+        assertEquals(1, results.size());
+        assertTrue(results.stream().anyMatch(result -> result.equals(dto)));
     }
 }
