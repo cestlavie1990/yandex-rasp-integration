@@ -5,6 +5,7 @@ CREATE TABLE "station" (
     "esr_code"       VARCHAR,
     "yandex_code"    VARCHAR,
     "title"          VARCHAR                     NOT NULL,
+    "direction"      VARCHAR                     NOT NULL,
     "station_type"   VARCHAR                     NOT NULL,
     "transport_type" VARCHAR                     NOT NULL,
     "latitude"       DOUBLE PRECISION            NOT NULL,
