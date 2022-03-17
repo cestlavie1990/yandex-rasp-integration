@@ -16,18 +16,20 @@ public class CountryTestHelper extends AbstractTestHelper<UUID, CountryEntity> {
     @NonNull
     private final CountryRepository repository;
 
-    public static String DEFAULT_TITLE = "countryTitle";
-    public static CodeEmbedded DEFAULT_CODE =
-            CodeEmbedded.builder().yandexCode("countryYandexCode").esrCode("countryEsrCode").build();
-
     @Transactional
     @Override
     public @NonNull UUID create() {
-        return repository.save(CountryEntity.builder().code(DEFAULT_CODE).title(DEFAULT_TITLE).build()).getId();
+        return repository.save(CountryEntity.builder().code(Default.CODE).title(Default.TITLE).build()).getId();
     }
 
     @Override
     protected @NonNull GenericRepository<CountryEntity, UUID> getRepository() {
         return repository;
+    }
+
+    public static final class Default {
+        public static String TITLE = "country-title";
+        public static CodeEmbedded CODE =
+                CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build();
     }
 }

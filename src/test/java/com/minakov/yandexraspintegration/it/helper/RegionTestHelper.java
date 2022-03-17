@@ -18,10 +18,6 @@ public class RegionTestHelper extends AbstractTestHelper<UUID, RegionEntity> {
     @NonNull
     private final CountryTestHelper countryTestHelper;
 
-    public static String DEFAULT_TITLE = "regionTitle";
-    public static CodeEmbedded DEFAULT_CODE =
-            CodeEmbedded.builder().yandexCode("regionYandexCode").esrCode("regionEsrCode").build();
-
     @Transactional
     @Override
     public @NonNull UUID create() {
@@ -29,13 +25,19 @@ public class RegionTestHelper extends AbstractTestHelper<UUID, RegionEntity> {
 
         return repository.save(RegionEntity.builder()
                 .country(countryTestHelper.getEntity(countryId))
-                .code(DEFAULT_CODE)
-                .title(DEFAULT_TITLE)
+                .code(Default.CODE)
+                .title(Default.TITLE)
                 .build()).getId();
     }
 
     @Override
     protected @NonNull GenericRepository<RegionEntity, UUID> getRepository() {
         return repository;
+    }
+
+    public static final class Default {
+        public static String TITLE = "region-title";
+        public static CodeEmbedded CODE =
+                CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build();
     }
 }

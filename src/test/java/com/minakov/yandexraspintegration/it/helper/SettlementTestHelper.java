@@ -18,10 +18,6 @@ public class SettlementTestHelper extends AbstractTestHelper<UUID, SettlementEnt
     @NonNull
     private final RegionTestHelper regionTestHelper;
 
-    public static String DEFAULT_TITLE = "settlementTitle";
-    public static CodeEmbedded DEFAULT_CODE =
-            CodeEmbedded.builder().yandexCode("settlementYandexCode").esrCode("settlementEsrCode").build();
-
     @Transactional
     @Override
     public @NonNull UUID create() {
@@ -29,13 +25,19 @@ public class SettlementTestHelper extends AbstractTestHelper<UUID, SettlementEnt
 
         return repository.save(SettlementEntity.builder()
                 .region(regionTestHelper.getEntity(regionId))
-                .code(DEFAULT_CODE)
-                .title(DEFAULT_TITLE)
+                .code(Default.CODE)
+                .title(Default.TITLE)
                 .build()).getId();
     }
 
     @Override
     protected @NonNull GenericRepository<SettlementEntity, UUID> getRepository() {
         return repository;
+    }
+
+    public static final class Default {
+        public static String TITLE = "settlement-title";
+        public static CodeEmbedded CODE =
+                CodeEmbedded.builder().yandexCode("settlement-yandex-code").esrCode("settlement-esr-code").build();
     }
 }
