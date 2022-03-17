@@ -145,7 +145,6 @@ class RegionServiceTest extends AbstractIT {
         {
             final var results = service.getAll();
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getRegionId1().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getRegionId2().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getRegionId3().toString())));
@@ -153,7 +152,6 @@ class RegionServiceTest extends AbstractIT {
         {
             final var results = service.getAll(RegionEntity::getId);
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getRegionId1())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getRegionId2())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getRegionId3())));

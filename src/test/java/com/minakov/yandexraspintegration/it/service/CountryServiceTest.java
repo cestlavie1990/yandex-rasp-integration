@@ -145,7 +145,6 @@ class CountryServiceTest extends AbstractIT {
         {
             final var results = service.getAll();
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getCountryId1().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getCountryId2().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getCountryId3().toString())));
@@ -153,7 +152,6 @@ class CountryServiceTest extends AbstractIT {
         {
             final var results = service.getAll(CountryEntity::getId);
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getCountryId1())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getCountryId2())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getCountryId3())));

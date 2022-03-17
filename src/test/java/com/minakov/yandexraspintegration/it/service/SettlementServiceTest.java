@@ -145,7 +145,6 @@ class SettlementServiceTest extends AbstractIT {
         {
             final var results = service.getAll();
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getSettlementId1().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getSettlementId2().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getSettlementId3().toString())));
@@ -153,7 +152,6 @@ class SettlementServiceTest extends AbstractIT {
         {
             final var results = service.getAll(SettlementEntity::getId);
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getSettlementId1())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getSettlementId2())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getSettlementId3())));
