@@ -95,3 +95,27 @@ CREATE INDEX "idx__station__latitude" ON "station" ("latitude");
 
 DROP INDEX IF EXISTS "idx__station__longitude";
 CREATE INDEX "idx__station__longitude" ON "station" ("longitude");
+
+DROP INDEX IF EXISTS "idx__station__created_at";
+CREATE INDEX "idx__station__created_at" ON "station" ("created_at");
+
+DROP INDEX IF EXISTS "idx__station__updated_at";
+CREATE INDEX "idx__station__updated_at" ON "station" ("updated_at");
+
+DROP INDEX IF EXISTS "idx__settlement__created_at";
+CREATE INDEX "idx__settlement__created_at" ON "settlement" ("created_at");
+
+DROP INDEX IF EXISTS "idx__settlement__updated_at";
+CREATE INDEX "idx__settlement__updated_at" ON "settlement" ("updated_at");
+
+DROP INDEX IF EXISTS "idx__region__created_at";
+CREATE INDEX "idx__region__created_at" ON "region" ("created_at");
+
+DROP INDEX IF EXISTS "idx__region__updated_at";
+CREATE INDEX "idx__region__updated_at" ON "region" ("updated_at");
+
+DROP INDEX IF EXISTS "idx__country__created_at";
+CREATE INDEX "idx__country__created_at" ON "country" ("created_at");
+
+DROP INDEX IF EXISTS "idx__country__updated_at";
+CREATE INDEX "idx__country__updated_at" ON "country" ("updated_at");
