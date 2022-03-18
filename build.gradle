@@ -13,6 +13,7 @@ ext {
     okhttpVersion = '4.9.3'
     mapStructVersion = '1.4.2.Final'
     springGraphqlVersion = '1.0.0-M4'
+    jpaModelgenVersion = '5.6.7.Final'
 }
 
 group = 'com.minakov'
@@ -51,6 +52,7 @@ dependencies {
     //region database
     runtimeOnly 'com.h2database:h2'
     implementation 'org.flywaydb:flyway-core'
+    annotationProcessor "org.hibernate:hibernate-jpamodelgen:${project.ext.jpaModelgenVersion}"
     //end region
 
     //region utilities
