@@ -1,0 +1,10 @@
+extend type Query {
+    country(id: ID!): Country!
+    countries: [Country!]!
+}
+
+type Country {
+    id: ID!
+    title: String!
+    code: Code!
+}
