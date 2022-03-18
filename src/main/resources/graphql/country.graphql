@@ -1,10 +1,19 @@
 extend type Query {
     country(id: ID!): Country!
-    countries: [Country!]!
+    countries(filter: CountryFilter): [Country!]!
 }
 
 type Country {
     id: ID!
-    title: String!
     code: Code!
+    title: String!
+}
+
+input CountryFilter {
+    id: StringCriteria
+    title: StringCriteria
+
+    or: [CountryFilter!]
+    and: [CountryFilter!]
+    not: [CountryFilter!]
 }

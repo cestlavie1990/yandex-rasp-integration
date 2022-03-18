@@ -1,0 +1,4 @@
+input StringCriteria {
+    like: String
+    in: [String!]
+}

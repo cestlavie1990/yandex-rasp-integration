@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.controller.graphql.query;
 
+import com.minakov.yandexraspintegration.controller.graphql.input.country.CountryFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.country.Country;
 import com.minakov.yandexraspintegration.service.country.CountryService;
 import java.util.List;
@@ -8,6 +9,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -22,7 +24,7 @@ public class CountryQuery {
     }
 
     @QueryMapping
-    public List<Country> countries() {
+    public List<Country> countries(@Argument @Nullable final CountryFilter filter) {
         return service.getAll();
     }
 }
