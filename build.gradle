@@ -12,6 +12,7 @@ ext {
     lombokVersion = '1.18.22'
     okhttpVersion = '4.9.3'
     mapStructVersion = '1.4.2.Final'
+    springGraphqlVersion = '1.0.0-M4'
 }
 
 group = 'com.minakov'
@@ -27,6 +28,8 @@ configurations {
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
 }
 
 dependencies {
@@ -38,6 +41,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.experimental:graphql-spring-boot-starter:${project.ext.springGraphqlVersion}"
 
     implementation 'io.github.openfeign:feign-okhttp'
     implementation 'io.github.openfeign:feign-jackson'

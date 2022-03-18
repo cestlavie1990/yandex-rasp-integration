@@ -24,6 +24,12 @@ spring:
     locations:
       - "classpath:db/migration"
 
+  graphql:
+    schema:
+      fileExtensions: ".graphqls,.gqls,.graphql"
+      printer:
+        enabled: true
+
 feign:
   client:
     config:
