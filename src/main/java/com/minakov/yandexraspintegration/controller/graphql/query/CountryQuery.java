@@ -3,6 +3,7 @@ package com.minakov.yandexraspintegration.controller.graphql.query;
 import com.minakov.yandexraspintegration.controller.RequestHelper;
 import com.minakov.yandexraspintegration.controller.graphql.input.country.CountryFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.country.Country;
+import com.minakov.yandexraspintegration.service.country.CountryMapper;
 import com.minakov.yandexraspintegration.service.country.CountryService;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,6 @@ public class CountryQuery {
             @Argument final Map<String, Object> params /*TODO: Fix it, cannot be converted to an object at once.*/) {
         final var filter = requestHelper.toObject(params, "filter", CountryFilter.class);
 
-        return service.getAll();
+        return service.getAll(filter, CountryMapper.INSTANCE::toDto);
     }
 }
