@@ -1,4 +1,9 @@
 input StringCriteria {
-    like: String
-    in: [String!]
+    in: StringCriteriaValue
+    like: StringCriteriaValue
+}
+
+input StringCriteriaValue {
+    values: [String!]!
+    inverse: Boolean! = false
 }

@@ -1,6 +1,5 @@
 package com.minakov.yandexraspintegration.controller.graphql.input.filter;
 
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.lang.Nullable;
@@ -9,7 +8,7 @@ import org.springframework.lang.Nullable;
 @Builder
 public class StringCriteria implements ICriteria {
     @Nullable
-    private final String like;
+    private final StringCriteriaValue in;
     @Nullable
-    private final List<String> in;
+    private final StringCriteriaValue like;
 }
