@@ -1,0 +1,36 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+type Code {
+    esrCode: String
+    yandexCode: String
+}
+
+type Country {
+    code: Code!
+    id: ID!
+    title: String!
+}
+
+type Query {
+    countries(filter: CountryFilter): [Country!]!
+    country(id: ID!): Country!
+}
+
+input CountryFilter {
+    id: StringCriteria
+    title: StringCriteria
+}
+
+input StringCriteria {
+    in: StringCriteriaValue
+    like: StringCriteriaValue
+}
+
+input StringCriteriaValue {
+    inverse: Boolean! = false
+    values: [String!]!
+}
