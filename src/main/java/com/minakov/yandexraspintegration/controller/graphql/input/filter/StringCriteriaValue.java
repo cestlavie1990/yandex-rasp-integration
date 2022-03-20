@@ -8,7 +8,7 @@ import lombok.NonNull;
 
 @Getter
 @Builder
-public class StringCriteriaValue {
+public class StringCriteriaValue implements ICriteriaValue<String> {
     @Builder.Default
     @NonNull
     private final List<String> values = new ArrayList<>();

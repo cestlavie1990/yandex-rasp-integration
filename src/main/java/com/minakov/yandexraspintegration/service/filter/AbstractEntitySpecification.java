@@ -1,11 +1,11 @@
 package com.minakov.yandexraspintegration.service.filter;
 
-import com.minakov.yandexraspintegration.controller.graphql.input.filter.BaseFilter;
-import com.minakov.yandexraspintegration.controller.graphql.input.filter.ICriteria;
+import com.minakov.yandexraspintegration.controller.graphql.input.filter.IFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteria;
 import com.minakov.yandexraspintegration.model.IEntity;
-import com.minakov.yandexraspintegration.service.filter.util.PredicateUtil;
+import com.minakov.yandexraspintegration.service.filter.util.StringCriteriaUtil;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -20,44 +20,37 @@ import org.springframework.data.util.Pair;
 import org.springframework.lang.Nullable;
 
 @RequiredArgsConstructor
-public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extends BaseFilter<F>> implements Specification<E> {
+public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extends IFilter<F>> implements Specification<E> {
     @Nullable
     private final F filter;
 
     @NonNull
-    protected abstract List<Pair<? super ICriteria, SingularAttribute<E, ?>>> getCriteria(@Nullable final F filter);
+    protected List<Pair<StringCriteria, SingularAttribute<E, String>>> getStringCriteria(@Nullable final F filter) {
+        return Collections.emptyList();
+    }
 
+    @Nullable
     @Override
-    public @NonNull Predicate toPredicate(@NonNull final Root<E> root, @NonNull final CriteriaQuery<?> query,
+    public Predicate toPredicate(@NonNull final Root<E> root, @NonNull final CriteriaQuery<?> query,
             @NonNull final CriteriaBuilder builder) {
         if (filter == null) {
-            return builder.conjunction();
+            return null;
         }
 
         final var predicates = new ArrayList<Predicate>();
 
-        addPredicates(root, builder, filter, predicates::add);
-
-        if (filter.getAnd() != null) {
-            filter.getAnd().forEach(f -> addPredicates(root, builder, f, predicates::add));
-        }
-        if (filter.getOr() != null) {
-            filter.getOr().forEach(f -> addPredicates(root, builder, f, predicates::add));
-        }
-
-        return predicates.isEmpty() ? builder.conjunction() : builder.and(predicates.toArray(Predicate[]::new));
-    }
-
-    @SuppressWarnings("unchecked")
-    private void addPredicates(final Root<E> root, final CriteriaBuilder builder, final F filter,
-            final Consumer<Predicate> consumer) {
-        final var criteria = getCriteria(filter);
-
-        criteria.forEach(c -> {
-            if (c.getFirst() instanceof StringCriteria) {
-                consumer.accept(PredicateUtil.getPredicate(((StringCriteria) c.getFirst()), root,
-                        (SingularAttribute<E, String>) c.getSecond(), builder));
+        addPredicates(root, builder, filter, p -> {
+            if (p != null) {
+                predicates.add(p);
             }
         });
+
+        return predicates.isEmpty() ? null : builder.and(predicates.toArray(Predicate[]::new));
+    }
+
+    private void addPredicates(final Root<E> root, final CriteriaBuilder builder, final F filter,
+            final Consumer<Predicate> consumer) {
+        getStringCriteria(filter).forEach(
+                c -> consumer.accept(StringCriteriaUtil.getPredicate((c.getFirst()), root, c.getSecond(), builder)));
     }
 }

@@ -9,19 +9,19 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
+import org.springframework.lang.Nullable;
 
 @UtilityClass
-public class PredicateUtil {
-    @NonNull
+public class StringCriteriaUtil {
+    @Nullable
     public static <E> Predicate getPredicate(@NonNull final StringCriteria criteria, @NonNull final Root<E> root,
             @NonNull final SingularAttribute<E, String> attr, @NonNull final CriteriaBuilder builder) {
-        Predicate predicate = builder.conjunction();
-
         final var path = root.get(attr);
 
+        Predicate predicate = null;
+
         if (criteria.getIn() != null) {
-            predicate =
-                    builder.and(predicate, getIn(path, criteria.getIn().getValues(), criteria.getIn().getInverse()));
+            predicate = getIn(path, criteria.getIn().getValues(), criteria.getIn().getInverse());
         }
         if (criteria.getLike() != null) {
             predicate = builder.and(predicate,
@@ -36,8 +36,7 @@ public class PredicateUtil {
 
     private static Predicate getLike(final CriteriaBuilder builder, final Path<String> path, final List<String> values,
             boolean inverse) {
-        final var predicate =
-                builder.and(values.stream().map(val -> builder.like(path, val)).toArray(Predicate[]::new));
+        final var predicate = builder.or(values.stream().map(val -> builder.like(path, val)).toArray(Predicate[]::new));
 
         return inverse ? predicate.not() : predicate;
     }

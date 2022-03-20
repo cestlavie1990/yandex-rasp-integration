@@ -12,8 +12,4 @@ type Country {
 input CountryFilter {
     id: StringCriteria
     title: StringCriteria
-
-    or: [CountryFilter!]
-    and: [CountryFilter!]
-    not: [CountryFilter!]
 }
