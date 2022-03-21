@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.it.controller.graphql.query;
+package com.minakov.yandexraspintegration.it.controller.graphql;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,12 +21,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 
 @SpringBootIT
-class CountryQueryTest extends AbstractIT {
-    @Value("classpath:data/controller/graphql/query/country/country.graphql")
+class CountryControllerTest extends AbstractIT {
+    @Value("classpath:data/controller/graphql/country/country.graphql")
     private Resource countryQuery;
-    @Value("classpath:data/controller/graphql/query/country/countries.graphql")
+    @Value("classpath:data/controller/graphql/country/countries.graphql")
     private Resource countriesQuery;
-    @Value("classpath:data/controller/graphql/query/country/countries-filtered.graphql")
+    @Value("classpath:data/controller/graphql/country/countries-filtered.graphql")
     private Resource countriesFilteredQuery;
 
     @Autowired

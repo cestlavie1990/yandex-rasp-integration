@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.controller.graphql.query;
+package com.minakov.yandexraspintegration.controller.graphql;
 
 import com.minakov.yandexraspintegration.controller.RequestHelper;
 import com.minakov.yandexraspintegration.controller.graphql.input.country.CountryFilter;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class CountryQuery {
+public class CountryController {
     @NonNull
     private final CountryService service;
     @NonNull
