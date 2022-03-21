@@ -1,0 +1,10 @@
+query getCountry($id: ID!){
+    country(id: $id) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+    }
+}

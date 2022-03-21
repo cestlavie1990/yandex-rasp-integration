@@ -1,0 +1,10 @@
+{
+    countries {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+    }
+}

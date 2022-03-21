@@ -1,0 +1,10 @@
+query getCountries($filter: CountryFilter){
+    countries(filter: $filter) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+    }
+}
