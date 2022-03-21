@@ -69,6 +69,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.cloud:spring-cloud-contract-wiremock'
     testImplementation "io.rest-assured:rest-assured:${project.ext.restAssuredVersion}"
+    testImplementation "io.rest-assured:json-path:${project.ext.restAssuredVersion}"
+    testImplementation "io.rest-assured:xml-path:${project.ext.restAssuredVersion}"
     //end region
 }
 
