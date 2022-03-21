@@ -7,7 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
-@AutoConfigureWireMock
+@AutoConfigureWireMock(port = 0)
 public abstract class AbstractIT {
     protected static final UUID FAKE_UUID = UUID.randomUUID();
 
