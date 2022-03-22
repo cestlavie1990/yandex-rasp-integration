@@ -12,6 +12,7 @@ type Code {
 type Country {
     code: Code!
     id: ID!
+    regions: [Region!]!
     title: String!
 }
 
