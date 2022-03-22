@@ -22,6 +22,8 @@ type Query {
     regions: [Region!]!
     settlement(id: ID!): Settlement!
     settlements: [Settlement!]!
+    station(id: ID!): Station!
+    stations: [Station!]!
 }
 
 type Region {
@@ -36,6 +38,18 @@ type Settlement {
     id: ID!
     region: Region!
     title: String!
+}
+
+type Station {
+    code: Code!
+    direction: String!
+    id: ID!
+    latitude: Float!
+    longitude: Float!
+    settlement: Settlement!
+    stationType: String!
+    title: String!
+    transportType: String!
 }
 
 input CountryFilter {
