@@ -18,6 +18,24 @@ type Country {
 type Query {
     countries(filter: CountryFilter): [Country!]!
     country(id: ID!): Country!
+    region(id: ID!): Region!
+    regions: [Region!]!
+    settlement(id: ID!): Settlement!
+    settlements: [Settlement!]!
+}
+
+type Region {
+    code: Code!
+    country: Country!
+    id: ID!
+    title: String!
+}
+
+type Settlement {
+    code: Code!
+    id: ID!
+    region: Region!
+    title: String!
 }
 
 input CountryFilter {

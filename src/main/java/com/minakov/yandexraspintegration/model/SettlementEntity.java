@@ -40,9 +40,17 @@ public class SettlementEntity extends AbstractAuditEntity implements IEntity<UUI
     @JoinColumn(name = "region_id", nullable = false)
     private RegionEntity region;
 
+    @Column(name = "region_id", nullable = false, insertable = false, updatable = false)
+    private UUID regionId;
+
     @Embedded
     private CodeEmbedded code;
 
     @Column(nullable = false)
     private String title;
+
+    public void setRegion(RegionEntity region) {
+        this.region = region;
+        this.regionId = region == null ? null : region.getId();
+    }
 }

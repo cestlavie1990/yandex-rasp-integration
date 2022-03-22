@@ -1,0 +1,11 @@
+extend type Query {
+    settlement(id: ID!): Settlement!
+    settlements: [Settlement!]!
+}
+
+type Settlement {
+    id: ID!
+    code: Code!
+    title: String!
+    region: Region!
+}
