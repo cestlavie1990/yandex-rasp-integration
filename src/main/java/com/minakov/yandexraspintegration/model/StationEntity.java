@@ -40,6 +40,9 @@ public class StationEntity extends AbstractAuditEntity implements IEntity<UUID> 
     @JoinColumn(name = "settlement_id", nullable = false)
     private SettlementEntity settlement;
 
+    @Column(name = "settlement_id", nullable = false, insertable = false, updatable = false)
+    private UUID settlementId;
+
     @Embedded
     private CodeEmbedded code;
 
@@ -60,4 +63,9 @@ public class StationEntity extends AbstractAuditEntity implements IEntity<UUID> 
 
     @Column(nullable = false)
     private Double longitude;
+
+    public void setSettlement(SettlementEntity settlement) {
+        this.settlement = settlement;
+        this.settlementId = settlement == null ? null : settlement.getId();
+    }
 }

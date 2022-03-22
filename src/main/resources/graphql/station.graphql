@@ -1,0 +1,16 @@
+extend type Query {
+    station(id: ID!): Station!
+    stations: [Station!]!
+}
+
+type Station {
+    id: ID!
+    code: Code!
+    title: String!
+    latitude: Float!
+    longitude: Float!
+    direction: String!
+    stationType: String!
+    transportType: String!
+    settlement: Settlement!
+}
