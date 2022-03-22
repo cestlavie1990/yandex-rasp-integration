@@ -1,0 +1,11 @@
+extend type Query {
+    region(id: ID!): Region!
+    regions: [Region!]!
+}
+
+type Region {
+    id: ID!
+    code: Code!
+    title: String!
+    country: Country!
+}

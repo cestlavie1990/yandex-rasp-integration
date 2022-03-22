@@ -40,9 +40,17 @@ public class RegionEntity extends AbstractAuditEntity implements IEntity<UUID> {
     @JoinColumn(name = "country_id", nullable = false)
     private CountryEntity country;
 
+    @Column(name = "country_id", nullable = false, insertable = false, updatable = false)
+    private UUID countryId;
+
     @Embedded
     private CodeEmbedded code;
 
     @Column(nullable = false)
     private String title;
+
+    public void setCountry(CountryEntity country) {
+        this.country = country;
+        this.countryId = country == null ? null : country.getId();
+    }
 }
