@@ -43,6 +43,6 @@ public class CountryController {
 
     @SchemaMapping
     public List<Region> regions(final Country country) {
-        return regionService.getAllByCountryId(country.getId(), RegionMapper.INSTANCE::toDto);
+        return regionService.getAllByCountryId(UUID.fromString(country.getId()), RegionMapper.INSTANCE::toDto);
     }
 }
