@@ -1,26 +1,16 @@
 package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StationDto {
-    @NonNull
-    private CodeDto codes;
-    @NonNull
-    private String title;
-    @NonNull
-    private String direction;
-    @NonNull
-    private String stationType;
-    @NonNull
-    private String transportType;
-    @NonNull
-    private Double latitude;
-    @NonNull
-    private Double longitude;
+    private final CodeDto codes;
+    private final String title;
+    private final String direction;
+    private final String stationType;
+    private final String transportType;
+    private final Double latitude;
+    private final Double longitude;
 }

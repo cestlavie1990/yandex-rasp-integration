@@ -1,19 +1,13 @@
 package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SettlementDto {
-    @NonNull
-    private CodeDto codes;
-    @NonNull
-    private String title;
-    @NonNull
-    private List<StationDto> stations;
+    private final CodeDto codes;
+    private final String title;
+    private final List<StationDto> stations;
 }

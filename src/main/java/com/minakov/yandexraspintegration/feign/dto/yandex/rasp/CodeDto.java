@@ -1,16 +1,11 @@
 package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CodeDto {
-    @Nullable
-    private String esrCode;
-    @Nullable
-    private String yandexCode;
+    private final String esrCode;
+    private final String yandexCode;
 }
