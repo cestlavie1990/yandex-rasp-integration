@@ -38,12 +38,11 @@ public class StationController {
     @BatchMapping
     public Map<Station, Settlement> settlement(final List<Station> stations) {
         final var settlements = settlementService.getAllById(
-                        stations.stream().map(Station::getSettlementId).collect(Collectors.toSet()))
+                        stations.stream().map(s -> UUID.fromString(s.getSettlementId())).collect(Collectors.toSet()))
                 .stream()
                 .collect(Collectors.toMap(Settlement::getId, Function.identity()));
 
         return stations.stream()
-                .collect(HashMap::new, (m, v) -> m.put(v, settlements.get(v.getSettlementId().toString())),
-                        HashMap::putAll);
+                .collect(HashMap::new, (m, v) -> m.put(v, settlements.get(v.getSettlementId())), HashMap::putAll);
     }
 }

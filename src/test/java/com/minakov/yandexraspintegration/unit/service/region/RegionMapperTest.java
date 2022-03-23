@@ -32,6 +32,7 @@ class RegionMapperTest {
         final var entity = RegionEntity.builder()
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
+                .countryId(COUNTRY.getId())
                 .title("region-title")
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
@@ -42,7 +43,7 @@ class RegionMapperTest {
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
         assertEquals(entity.getCode().getEsrCode(), dto.getCode().getEsrCode());
-        assertEquals(entity.getCountry().getId(), dto.getCountryId());
+        assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
     }
 
     @Test
@@ -50,6 +51,7 @@ class RegionMapperTest {
         final var entity = RegionEntity.builder()
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
+                .countryId(COUNTRY.getId())
                 .title("region-title")
                 .code(CodeEmbedded.builder().build())
                 .build();
@@ -58,7 +60,7 @@ class RegionMapperTest {
 
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
-        assertEquals(entity.getCountry().getId(), dto.getCountryId());
+        assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
         assertNull(dto.getCode().getYandexCode());
         assertNull(dto.getCode().getEsrCode());
     }
@@ -68,6 +70,7 @@ class RegionMapperTest {
         final var entity = RegionEntity.builder()
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
+                .countryId(COUNTRY.getId())
                 .title("region-title")
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();

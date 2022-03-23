@@ -37,12 +37,12 @@ public class SettlementController {
 
     @BatchMapping
     public Map<Settlement, Region> region(final List<Settlement> settlements) {
-        final var regions =
-                regionService.getAllById(settlements.stream().map(Settlement::getRegionId).collect(Collectors.toSet()))
-                        .stream()
-                        .collect(Collectors.toMap(Region::getId, Function.identity()));
+        final var regions = regionService.getAllById(
+                        settlements.stream().map(s -> UUID.fromString(s.getRegionId())).collect(Collectors.toSet()))
+                .stream()
+                .collect(Collectors.toMap(Region::getId, Function.identity()));
 
         return settlements.stream()
-                .collect(HashMap::new, (m, v) -> m.put(v, regions.get(v.getRegionId().toString())), HashMap::putAll);
+                .collect(HashMap::new, (m, v) -> m.put(v, regions.get(v.getRegionId())), HashMap::putAll);
     }
 }

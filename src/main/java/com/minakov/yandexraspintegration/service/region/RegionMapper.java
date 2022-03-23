@@ -3,7 +3,6 @@ package com.minakov.yandexraspintegration.service.region;
 import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.service.IMapper;
-import java.util.UUID;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -15,11 +14,8 @@ public interface RegionMapper extends IMapper<RegionEntity, Region> {
 
     @Override
     @Mappings({
-            @Mapping(target = "countryId", source = "source.country.id")
+            @Mapping(target = "id", expression = "java(source.getId().toString())"),
+            @Mapping(target = "countryId", expression = "java(source.getCountryId().toString())")
     })
     Region toDto(final RegionEntity source);
-
-    default String map(final UUID id) {
-        return id == null ? null : id.toString();
-    }
 }

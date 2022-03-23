@@ -3,7 +3,6 @@ package com.minakov.yandexraspintegration.service.station;
 import com.minakov.yandexraspintegration.controller.graphql.type.station.Station;
 import com.minakov.yandexraspintegration.model.StationEntity;
 import com.minakov.yandexraspintegration.service.IMapper;
-import java.util.UUID;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -15,11 +14,8 @@ public interface StationMapper extends IMapper<StationEntity, Station> {
 
     @Override
     @Mappings({
-            @Mapping(target = "settlementId", source = "source.settlement.id")
+            @Mapping(target = "id", expression = "java(source.getId().toString())"),
+            @Mapping(target = "settlementId", expression = "java(source.getSettlementId().toString())")
     })
     Station toDto(final StationEntity source);
-
-    default String map(final UUID id) {
-        return id == null ? null : id.toString();
-    }
 }

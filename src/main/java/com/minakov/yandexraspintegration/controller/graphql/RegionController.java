@@ -37,12 +37,12 @@ public class RegionController {
 
     @BatchMapping
     public Map<Region, Country> country(final List<Region> regions) {
-        final var countries =
-                countryService.getAllById(regions.stream().map(Region::getCountryId).collect(Collectors.toSet()))
-                        .stream()
-                        .collect(Collectors.toMap(Country::getId, Function.identity()));
+        final var countries = countryService.getAllById(
+                        regions.stream().map(r -> UUID.fromString(r.getCountryId())).collect(Collectors.toSet()))
+                .stream()
+                .collect(Collectors.toMap(Country::getId, Function.identity()));
 
         return regions.stream()
-                .collect(HashMap::new, (m, v) -> m.put(v, countries.get(v.getCountryId().toString())), HashMap::putAll);
+                .collect(HashMap::new, (m, v) -> m.put(v, countries.get(v.getCountryId())), HashMap::putAll);
     }
 }

@@ -30,6 +30,7 @@ class SettlementMapperTest {
         REGION = RegionEntity.builder()
                 .id(UUID.randomUUID())
                 .country(country)
+                .countryId(country.getId())
                 .title("region-title")
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
@@ -40,6 +41,7 @@ class SettlementMapperTest {
         final var entity = SettlementEntity.builder()
                 .id(UUID.randomUUID())
                 .region(REGION)
+                .regionId(REGION.getId())
                 .title("settlement-title")
                 .code(CodeEmbedded.builder()
                         .yandexCode("settlement-yandex-code")
@@ -53,7 +55,7 @@ class SettlementMapperTest {
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
         assertEquals(entity.getCode().getEsrCode(), dto.getCode().getEsrCode());
-        assertEquals(entity.getRegion().getId(), dto.getRegionId());
+        assertEquals(entity.getRegion().getId().toString(), dto.getRegionId());
     }
 
     @Test
@@ -61,6 +63,7 @@ class SettlementMapperTest {
         final var entity = SettlementEntity.builder()
                 .id(UUID.randomUUID())
                 .region(REGION)
+                .regionId(REGION.getId())
                 .title("settlement-title")
                 .code(CodeEmbedded.builder().build())
                 .build();
@@ -69,7 +72,7 @@ class SettlementMapperTest {
 
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
-        assertEquals(entity.getRegion().getId(), dto.getRegionId());
+        assertEquals(entity.getRegion().getId().toString(), dto.getRegionId());
         assertNull(dto.getCode().getYandexCode());
         assertNull(dto.getCode().getEsrCode());
     }
@@ -79,6 +82,7 @@ class SettlementMapperTest {
         final var entity = SettlementEntity.builder()
                 .id(UUID.randomUUID())
                 .region(REGION)
+                .regionId(REGION.getId())
                 .title("settlement-title")
                 .code(CodeEmbedded.builder()
                         .yandexCode("settlement-yandex-code")

@@ -31,6 +31,7 @@ class StationMapperTest {
         final var region = RegionEntity.builder()
                 .id(UUID.randomUUID())
                 .country(country)
+                .countryId(country.getId())
                 .title("region-title")
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
@@ -38,6 +39,7 @@ class StationMapperTest {
         SETTLEMENT = SettlementEntity.builder()
                 .id(UUID.randomUUID())
                 .region(region)
+                .regionId(region.getId())
                 .title("settlement-title")
                 .code(CodeEmbedded.builder()
                         .yandexCode("settlement-yandex-code")
@@ -51,6 +53,7 @@ class StationMapperTest {
         final var entity = StationEntity.builder()
                 .id(UUID.randomUUID())
                 .settlement(SETTLEMENT)
+                .settlementId(SETTLEMENT.getId())
                 .title("station-title")
                 .code(CodeEmbedded.builder().yandexCode("station-yandex-code").esrCode("station-esr-code").build())
                 .direction("station-direction")
@@ -66,7 +69,7 @@ class StationMapperTest {
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
         assertEquals(entity.getCode().getEsrCode(), dto.getCode().getEsrCode());
-        assertEquals(entity.getSettlement().getId(), dto.getSettlementId());
+        assertEquals(entity.getSettlement().getId().toString(), dto.getSettlementId());
     }
 
     @Test
@@ -74,6 +77,7 @@ class StationMapperTest {
         final var entity = StationEntity.builder()
                 .id(UUID.randomUUID())
                 .settlement(SETTLEMENT)
+                .settlementId(SETTLEMENT.getId())
                 .title("station-title")
                 .code(CodeEmbedded.builder().build())
                 .direction("station-direction")
@@ -87,7 +91,7 @@ class StationMapperTest {
 
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
-        assertEquals(entity.getSettlement().getId(), dto.getSettlementId());
+        assertEquals(entity.getSettlement().getId().toString(), dto.getSettlementId());
         assertNull(dto.getCode().getYandexCode());
         assertNull(dto.getCode().getEsrCode());
     }
@@ -97,6 +101,7 @@ class StationMapperTest {
         final var entity = StationEntity.builder()
                 .id(UUID.randomUUID())
                 .settlement(SETTLEMENT)
+                .settlementId(SETTLEMENT.getId())
                 .title("station-title")
                 .code(CodeEmbedded.builder().yandexCode("station-yandex-code").esrCode("station-esr-code").build())
                 .direction("station-direction")
