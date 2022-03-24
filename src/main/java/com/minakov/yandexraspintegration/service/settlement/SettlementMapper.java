@@ -1,7 +1,9 @@
 package com.minakov.yandexraspintegration.service.settlement;
 
+import com.minakov.yandexraspintegration.controller.graphql.type.code.Code;
 import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
+import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import com.minakov.yandexraspintegration.service.IMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,4 +20,10 @@ public interface SettlementMapper extends IMapper<SettlementEntity, Settlement> 
             @Mapping(target = "regionId", expression = "java(source.getRegionId().toString())")
     })
     Settlement toDto(final SettlementEntity source);
+
+    default Code map(CodeEmbedded value) {
+        final var builder = Code.builder();
+        return value == null ? builder.build() :
+                builder.esrCode(value.getEsrCode()).yandexCode(value.getYandexCode()).build();
+    }
 }
