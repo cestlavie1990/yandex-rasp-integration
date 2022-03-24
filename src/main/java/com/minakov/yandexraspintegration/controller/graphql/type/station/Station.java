@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
+import org.springframework.lang.Nullable;
 
 @Getter
 @SuperBuilder
@@ -18,8 +19,8 @@ public class Station extends AbstractYandexRasp<String> {
     private final String stationType;
     @NonNull
     private final String transportType;
-    @NonNull
+    @Nullable
     private final Double latitude;
-    @NonNull
+    @Nullable
     private final Double longitude;
 }

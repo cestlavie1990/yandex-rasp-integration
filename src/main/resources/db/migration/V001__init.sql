@@ -8,8 +8,8 @@ CREATE TABLE "station" (
     "direction"      VARCHAR                     NOT NULL,
     "station_type"   VARCHAR                     NOT NULL,
     "transport_type" VARCHAR                     NOT NULL,
-    "latitude"       DOUBLE PRECISION            NOT NULL,
-    "longitude"      DOUBLE PRECISION            NOT NULL,
+    "latitude"       DOUBLE PRECISION,
+    "longitude"      DOUBLE PRECISION,
     "created_at"     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at"     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );

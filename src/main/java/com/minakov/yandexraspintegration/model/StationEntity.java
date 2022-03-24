@@ -58,10 +58,10 @@ public class StationEntity extends AbstractAuditEntity implements IEntity<UUID> 
     @Column(nullable = false)
     private String transportType;
 
-    @Column(nullable = false)
+    @Column
     private Double latitude;
 
-    @Column(nullable = false)
+    @Column
     private Double longitude;
 
     public void setSettlement(SettlementEntity settlement) {
