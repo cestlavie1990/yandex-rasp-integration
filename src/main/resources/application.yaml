@@ -23,8 +23,6 @@ spring:
     database-platform: "org.hibernate.dialect.H2Dialect"
     properties:
       hibernate:
-        id:
-          new_generator_mappings: true
         format_sql: true
         globally_quoted_identifiers: true
         order_inserts: true
