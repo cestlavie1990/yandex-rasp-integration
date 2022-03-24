@@ -88,6 +88,26 @@ ALTER TABLE "region"
     ADD CONSTRAINT "fk__region__country" FOREIGN KEY ("country_id")
         REFERENCES "country" ("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- UQ
+ALTER TABLE "station"
+    DROP CONSTRAINT IF EXISTS "uq__station";
+ALTER TABLE "station"
+    ADD CONSTRAINT "uq__station" UNIQUE ("yandex_code", "esr_code", "title");
+
+ALTER TABLE "settlement"
+    DROP CONSTRAINT IF EXISTS "uq__settlement";
+ALTER TABLE "settlement"
+    ADD CONSTRAINT "uq__settlement" UNIQUE ("yandex_code", "esr_code", "title");
+
+ALTER TABLE "region"
+    DROP CONSTRAINT IF EXISTS "uq__region";
+ALTER TABLE "region"
+    ADD CONSTRAINT "uq__region" UNIQUE ("yandex_code", "esr_code", "title");
+
+ALTER TABLE "country"
+    DROP CONSTRAINT IF EXISTS "uq__country";
+ALTER TABLE "country"
+    ADD CONSTRAINT "uq__country" UNIQUE ("yandex_code", "esr_code", "title");
 
 -- INDEX
 DROP INDEX IF EXISTS "idx__station__latitude";
