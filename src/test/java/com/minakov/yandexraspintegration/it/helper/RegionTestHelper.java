@@ -26,7 +26,7 @@ public class RegionTestHelper extends AbstractTestHelper<UUID, RegionEntity> {
         return repository.save(RegionEntity.builder()
                 .country(countryTestHelper.getEntity(countryId))
                 .code(Default.CODE)
-                .title(Default.TITLE)
+                .title(Default.TITLE.concat(UUID.randomUUID().toString()))
                 .build()).getId();
     }
 
@@ -36,8 +36,9 @@ public class RegionTestHelper extends AbstractTestHelper<UUID, RegionEntity> {
     }
 
     public static final class Default {
-        public static String TITLE = "region-title";
-        public static CodeEmbedded CODE =
+        private static final String TITLE = "region-title-";
+
+        public static final CodeEmbedded CODE =
                 CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build();
     }
 }

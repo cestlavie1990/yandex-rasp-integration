@@ -19,7 +19,10 @@ public class CountryTestHelper extends AbstractTestHelper<UUID, CountryEntity> {
     @Transactional
     @Override
     public @NonNull UUID create() {
-        return repository.save(CountryEntity.builder().code(Default.CODE).title(Default.TITLE).build()).getId();
+        return repository.save(CountryEntity.builder()
+                .code(Default.CODE)
+                .title(Default.TITLE.concat(UUID.randomUUID().toString()))
+                .build()).getId();
     }
 
     @Override
@@ -28,8 +31,9 @@ public class CountryTestHelper extends AbstractTestHelper<UUID, CountryEntity> {
     }
 
     public static final class Default {
-        public static String TITLE = "country-title";
-        public static CodeEmbedded CODE =
+        private static final String TITLE = "country-title-";
+
+        public static final CodeEmbedded CODE =
                 CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build();
     }
 }

@@ -26,7 +26,7 @@ public class SettlementTestHelper extends AbstractTestHelper<UUID, SettlementEnt
         return repository.save(SettlementEntity.builder()
                 .region(regionTestHelper.getEntity(regionId))
                 .code(Default.CODE)
-                .title(Default.TITLE)
+                .title(Default.TITLE.concat(UUID.randomUUID().toString()))
                 .build()).getId();
     }
 
@@ -36,8 +36,9 @@ public class SettlementTestHelper extends AbstractTestHelper<UUID, SettlementEnt
     }
 
     public static final class Default {
-        public static String TITLE = "settlement-title";
-        public static CodeEmbedded CODE =
+        private static final String TITLE = "settlement-title-";
+
+        public static final CodeEmbedded CODE =
                 CodeEmbedded.builder().yandexCode("settlement-yandex-code").esrCode("settlement-esr-code").build();
     }
 }

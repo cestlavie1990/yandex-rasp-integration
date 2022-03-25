@@ -12,8 +12,10 @@ import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringC
 import com.minakov.yandexraspintegration.it.AbstractIT;
 import com.minakov.yandexraspintegration.it.SpringBootIT;
 import com.minakov.yandexraspintegration.it.helper.CountryTestHelper;
+import com.minakov.yandexraspintegration.model.CountryEntity;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +37,14 @@ class CountryControllerTest extends AbstractIT {
     @Test
     void getById() {
         final var id = countryTestHelper.create().toString();
+        final var title = countryTestHelper.get(UUID.fromString(id), CountryEntity::getTitle);
 
         requestHelper.graphql(countryQuery, Map.of("id", id))
                 .statusCode(200)
                 .assertThat()
                 .body("errors", nullValue())
                 .body("data.country.id", equalTo(id))
-                .body("data.country.title", equalTo(CountryTestHelper.Default.TITLE))
+                .body("data.country.title", equalTo(title))
                 .body("data.country.code.esrCode", equalTo(CountryTestHelper.Default.CODE.getEsrCode()))
                 .body("data.country.code.yandexCode", equalTo(CountryTestHelper.Default.CODE.getYandexCode()));
     }

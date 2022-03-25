@@ -26,7 +26,7 @@ public class StationTestHelper extends AbstractTestHelper<UUID, StationEntity> {
         return repository.save(StationEntity.builder()
                 .settlement(settlementTestHelper.getEntity(settlementId))
                 .code(Default.CODE)
-                .title(Default.TITLE)
+                .title(Default.TITLE.concat(UUID.randomUUID().toString()))
                 .direction(Default.DIRECTION)
                 .transportType(Default.TRANSPORT_TYPE)
                 .stationType(Default.STATION_TYPE)
@@ -41,13 +41,14 @@ public class StationTestHelper extends AbstractTestHelper<UUID, StationEntity> {
     }
 
     public static final class Default {
-        public static String TITLE = "station-title";
-        public static String DIRECTION = "station-direction";
-        public static String TRANSPORT_TYPE = "station-transport-type";
-        public static String STATION_TYPE = "station-type";
-        public static Double LONGITUDE = 100.501;
-        public static Double LATITUDE = -100.502;
-        public static CodeEmbedded CODE =
+        private static final String TITLE = "station-title-";
+
+        public static final String DIRECTION = "station-direction";
+        public static final String TRANSPORT_TYPE = "station-transport-type";
+        public static final String STATION_TYPE = "station-type";
+        public static final Double LONGITUDE = 100.501;
+        public static final Double LATITUDE = -100.502;
+        public static final CodeEmbedded CODE =
                 CodeEmbedded.builder().yandexCode("station-yandex-code").esrCode("station-esr-code").build();
     }
 }
