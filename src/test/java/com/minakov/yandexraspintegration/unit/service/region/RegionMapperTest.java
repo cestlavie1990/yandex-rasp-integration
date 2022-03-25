@@ -39,16 +39,21 @@ class RegionMapperTest {
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
-                .title("region-title")
-                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .code(CodeEmbedded.builder()
+                                .yandexCode("region-yandex-code")
+                                .esrCode("region-esr-code")
+                                .build())
+                        .title("region-title")
+                        .build())
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getTitle(), dto.getTitle());
-        assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
-        assertEquals(entity.getCode().getEsrCode(), dto.getCode().getEsrCode());
+        assertEquals(entity.getYandexRaspKey().getTitle(), dto.getTitle());
+        assertEquals(entity.getYandexRaspKey().getCode().getYandexCode(), dto.getCode().getYandexCode());
+        assertEquals(entity.getYandexRaspKey().getCode().getEsrCode(), dto.getCode().getEsrCode());
         assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
     }
 
@@ -58,14 +63,14 @@ class RegionMapperTest {
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
-                .title("region-title")
-                .code(CodeEmbedded.builder().build())
+                .yandexRaspKey(
+                        YandexRaspKey.builder().code(CodeEmbedded.builder().build()).title("region-title").build())
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getTitle(), dto.getTitle());
+        assertEquals(entity.getYandexRaspKey().getTitle(), dto.getTitle());
         assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
         assertNull(dto.getCode().getYandexCode());
         assertNull(dto.getCode().getEsrCode());
@@ -77,8 +82,13 @@ class RegionMapperTest {
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
-                .title("region-title")
-                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .code(CodeEmbedded.builder()
+                                .yandexCode("region-yandex-code")
+                                .esrCode("region-esr-code")
+                                .build())
+                        .title("region-title")
+                        .build())
                 .build();
 
         final var dto = MAPPER.map(entity);

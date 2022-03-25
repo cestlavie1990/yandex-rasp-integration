@@ -38,8 +38,13 @@ class StationMapperTest {
                 .id(UUID.randomUUID())
                 .country(country)
                 .countryId(country.getId())
-                .title("region-title")
-                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .code(CodeEmbedded.builder()
+                                .yandexCode("region-yandex-code")
+                                .esrCode("region-esr-code")
+                                .build())
+                        .title("region-title")
+                        .build())
                 .build();
 
         SETTLEMENT = SettlementEntity.builder()
