@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
+import com.minakov.yandexraspintegration.model.embedded.YandexRaspKey;
 import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import java.util.List;
 import java.util.UUID;
@@ -22,8 +23,13 @@ class RegionMapperTest {
     void beforeEach() {
         COUNTRY = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .title("country-title")
-                .code(CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .title("country-title")
+                        .code(CodeEmbedded.builder()
+                                .yandexCode("country-yandex-code")
+                                .esrCode("country-esr-code")
+                                .build())
+                        .build())
                 .build();
     }
 

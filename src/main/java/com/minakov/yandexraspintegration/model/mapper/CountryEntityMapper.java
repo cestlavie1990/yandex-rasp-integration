@@ -17,7 +17,8 @@ public interface CountryEntityMapper extends IMapper<CountryDto, CountryEntity> 
 
     @Override
     @Mappings({
-            @Mapping(target = "id", ignore = true), @Mapping(target = "code", source = "codes")
+            @Mapping(target = "id", ignore = true), @Mapping(target = "yandexRaspKey.code", source = "codes"),
+            @Mapping(target = "yandexRaspKey.title", source = "title")
     })
     CountryEntity map(final CountryDto source);
 

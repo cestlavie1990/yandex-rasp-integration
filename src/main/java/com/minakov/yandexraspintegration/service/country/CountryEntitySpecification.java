@@ -25,7 +25,8 @@ public class CountryEntitySpecification extends AbstractEntitySpecification<Coun
 
         if (filter != null) {
             if (filter.getTitle() != null) {
-                criteria.add(Pair.of(filter.getTitle(), CountryEntity_.title));
+//                criteria.add(Pair.of(filter.getTitle(), CountryEntity_.yandexRaspKey));
+                throw new UnsupportedOperationException();
             }
         }
 

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
+import com.minakov.yandexraspintegration.model.embedded.YandexRaspKey;
 import com.minakov.yandexraspintegration.service.country.CountryMapper;
 import java.util.List;
 import java.util.UUID;
@@ -18,30 +19,34 @@ class CountryMapperTest {
     void toDto_withoutNull() {
         final var entity = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .title("test-title")
-                .code(CodeEmbedded.builder().yandexCode("test-yandex-code").esrCode("test-esr-code").build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .title("test-title")
+                        .code(CodeEmbedded.builder().yandexCode("test-yandex-code").esrCode("test-esr-code").build())
+                        .build())
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getTitle(), dto.getTitle());
-        assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
-        assertEquals(entity.getCode().getEsrCode(), dto.getCode().getEsrCode());
+        assertEquals(entity.getYandexRaspKey().getTitle(), dto.getTitle());
+        assertEquals(entity.getYandexRaspKey().getCode().getYandexCode(), dto.getCode().getYandexCode());
+        assertEquals(entity.getYandexRaspKey().getCode().getEsrCode(), dto.getCode().getEsrCode());
     }
 
     @Test
     void toDto_withNull() {
         final var entity = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .title("test-title")
-                .code(CodeEmbedded.builder().build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .title("test-title")
+                        .code(CodeEmbedded.builder().build())
+                        .build())
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getTitle(), dto.getTitle());
+        assertEquals(entity.getYandexRaspKey().getTitle(), dto.getTitle());
         assertNull(dto.getCode().getYandexCode());
         assertNull(dto.getCode().getEsrCode());
     }
@@ -50,8 +55,10 @@ class CountryMapperTest {
     void toDto_list() {
         final var entity = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .title("test-title")
-                .code(CodeEmbedded.builder().yandexCode("test-yandex-code").esrCode("test-esr-code").build())
+                .yandexRaspKey(YandexRaspKey.builder()
+                        .title("test-title")
+                        .code(CodeEmbedded.builder().yandexCode("test-yandex-code").esrCode("test-esr-code").build())
+                        .build())
                 .build();
 
         final var dto = MAPPER.map(entity);
