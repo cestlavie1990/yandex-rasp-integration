@@ -32,6 +32,6 @@ public class SettlementService extends AbstractEntityService<UUID, Settlement, S
 
     @Override
     public @NonNull Function<SettlementEntity, Settlement> getMapper() {
-        return SettlementMapper.INSTANCE::toDto;
+        return SettlementMapper.INSTANCE::map;
     }
 }

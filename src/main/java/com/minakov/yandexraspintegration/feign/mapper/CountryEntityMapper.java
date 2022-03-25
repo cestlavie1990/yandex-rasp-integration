@@ -19,7 +19,7 @@ public interface CountryEntityMapper extends IMapper<CountryDto, CountryEntity> 
     @Mappings({
             @Mapping(target = "id", ignore = true), @Mapping(target = "code", source = "codes")
     })
-    CountryEntity toDto(final CountryDto source);
+    CountryEntity map(final CountryDto source);
 
     @AfterMapping
     default void updateRegions(@MappingTarget CountryEntity target) {

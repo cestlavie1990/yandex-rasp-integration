@@ -18,9 +18,9 @@ public interface CountryMapper extends IMapper<CountryEntity, Country> {
     @Mappings({
             @Mapping(target = "id", expression = "java(source.getId().toString())")
     })
-    Country toDto(final CountryEntity source);
+    Country map(final CountryEntity source);
 
-    default Code map(CodeEmbedded value) {
+    default Code mapCode(CodeEmbedded value) {
         final var builder = Code.builder();
         return value == null ? builder.build() :
                 builder.esrCode(value.getEsrCode()).yandexCode(value.getYandexCode()).build();

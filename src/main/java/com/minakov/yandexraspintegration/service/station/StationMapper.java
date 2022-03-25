@@ -19,9 +19,9 @@ public interface StationMapper extends IMapper<StationEntity, Station> {
             @Mapping(target = "id", expression = "java(source.getId().toString())"),
             @Mapping(target = "settlementId", expression = "java(source.getSettlementId().toString())")
     })
-    Station toDto(final StationEntity source);
+    Station map(final StationEntity source);
 
-    default Code map(CodeEmbedded value) {
+    default Code mapCode(CodeEmbedded value) {
         final var builder = Code.builder();
         return value == null ? builder.build() :
                 builder.esrCode(value.getEsrCode()).yandexCode(value.getYandexCode()).build();

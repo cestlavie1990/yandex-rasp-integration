@@ -44,6 +44,6 @@ public class CountryService extends AbstractEntityService<UUID, Country, Country
 
     @Override
     public @NonNull Function<CountryEntity, Country> getMapper() {
-        return CountryMapper.INSTANCE::toDto;
+        return CountryMapper.INSTANCE::map;
     }
 }

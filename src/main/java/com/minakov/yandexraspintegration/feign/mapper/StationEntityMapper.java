@@ -17,5 +17,5 @@ public interface StationEntityMapper extends IMapper<StationDto, StationEntity> 
             @Mapping(target = "id", ignore = true), @Mapping(target = "settlement", ignore = true),
             @Mapping(target = "settlementId", ignore = true), @Mapping(target = "code", source = "codes")
     })
-    StationEntity toDto(final StationDto source);
+    StationEntity map(final StationDto source);
 }

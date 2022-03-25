@@ -37,7 +37,7 @@ class RegionMapperTest {
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
 
-        final var dto = MAPPER.toDto(entity);
+        final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
@@ -56,7 +56,7 @@ class RegionMapperTest {
                 .code(CodeEmbedded.builder().build())
                 .build();
 
-        final var dto = MAPPER.toDto(entity);
+        final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
@@ -75,9 +75,9 @@ class RegionMapperTest {
                 .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
 
-        final var dto = MAPPER.toDto(entity);
+        final var dto = MAPPER.map(entity);
 
-        final var results = MAPPER.toDto(List.of(entity));
+        final var results = MAPPER.map(List.of(entity));
 
         assertEquals(1, results.size());
         assertTrue(results.stream().anyMatch(result -> result.equals(dto)));

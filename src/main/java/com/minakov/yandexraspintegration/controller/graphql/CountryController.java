@@ -38,11 +38,11 @@ public class CountryController {
             @Argument final Map<String, Object> params /*TODO: Fix it, cannot be converted to an object at once.*/) {
         final var filter = requestHelper.toObject(params, "filter", CountryFilter.class);
 
-        return service.getAll(filter, CountryMapper.INSTANCE::toDto);
+        return service.getAll(filter, CountryMapper.INSTANCE::map);
     }
 
     @SchemaMapping
     public List<Region> regions(final Country country) {
-        return regionService.getAllByCountryId(UUID.fromString(country.getId()), RegionMapper.INSTANCE::toDto);
+        return regionService.getAllByCountryId(UUID.fromString(country.getId()), RegionMapper.INSTANCE::map);
     }
 }

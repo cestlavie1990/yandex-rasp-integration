@@ -19,9 +19,9 @@ public interface RegionMapper extends IMapper<RegionEntity, Region> {
             @Mapping(target = "id", expression = "java(source.getId().toString())"),
             @Mapping(target = "countryId", expression = "java(source.getCountryId().toString())")
     })
-    Region toDto(final RegionEntity source);
+    Region map(final RegionEntity source);
 
-    default Code map(CodeEmbedded value) {
+    default Code mapCode(CodeEmbedded value) {
         final var builder = Code.builder();
         return value == null ? builder.build() :
                 builder.esrCode(value.getEsrCode()).yandexCode(value.getYandexCode()).build();

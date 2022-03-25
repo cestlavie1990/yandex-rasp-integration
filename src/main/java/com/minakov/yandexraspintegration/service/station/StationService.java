@@ -32,6 +32,6 @@ public class StationService extends AbstractEntityService<UUID, Station, Station
 
     @Override
     public @NonNull Function<StationEntity, Station> getMapper() {
-        return StationMapper.INSTANCE::toDto;
+        return StationMapper.INSTANCE::map;
     }
 }

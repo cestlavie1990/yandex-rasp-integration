@@ -19,9 +19,9 @@ public interface SettlementMapper extends IMapper<SettlementEntity, Settlement> 
             @Mapping(target = "id", expression = "java(source.getId().toString())"),
             @Mapping(target = "regionId", expression = "java(source.getRegionId().toString())")
     })
-    Settlement toDto(final SettlementEntity source);
+    Settlement map(final SettlementEntity source);
 
-    default Code map(CodeEmbedded value) {
+    default Code mapCode(CodeEmbedded value) {
         final var builder = Code.builder();
         return value == null ? builder.build() :
                 builder.esrCode(value.getEsrCode()).yandexCode(value.getYandexCode()).build();

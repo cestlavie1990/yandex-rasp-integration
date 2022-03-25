@@ -41,6 +41,6 @@ public class RegionService extends AbstractEntityService<UUID, Region, RegionEnt
 
     @Override
     public @NonNull Function<RegionEntity, Region> getMapper() {
-        return RegionMapper.INSTANCE::toDto;
+        return RegionMapper.INSTANCE::map;
     }
 }

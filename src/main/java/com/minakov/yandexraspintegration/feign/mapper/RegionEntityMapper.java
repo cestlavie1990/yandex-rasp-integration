@@ -20,7 +20,7 @@ public interface RegionEntityMapper extends IMapper<RegionDto, RegionEntity> {
             @Mapping(target = "id", ignore = true), @Mapping(target = "country", ignore = true),
             @Mapping(target = "countryId", ignore = true), @Mapping(target = "code", source = "codes")
     })
-    RegionEntity toDto(final RegionDto source);
+    RegionEntity map(final RegionDto source);
 
     @AfterMapping
     default void updateSettlements(@MappingTarget RegionEntity target) {

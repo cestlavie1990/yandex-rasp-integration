@@ -20,7 +20,7 @@ public interface SettlementEntityMapper extends IMapper<SettlementDto, Settlemen
             @Mapping(target = "id", ignore = true), @Mapping(target = "region", ignore = true),
             @Mapping(target = "regionId", ignore = true), @Mapping(target = "code", source = "codes")
     })
-    SettlementEntity toDto(final SettlementDto source);
+    SettlementEntity map(final SettlementDto source);
 
     @AfterMapping
     default void updateStations(@MappingTarget SettlementEntity target) {
