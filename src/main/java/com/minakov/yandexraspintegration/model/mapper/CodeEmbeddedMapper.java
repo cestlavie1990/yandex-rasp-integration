@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.feign.mapper;
+package com.minakov.yandexraspintegration.model.mapper;
 
 import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.CodeDto;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;

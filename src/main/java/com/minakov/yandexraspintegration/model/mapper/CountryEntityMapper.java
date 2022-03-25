@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.feign.mapper;
+package com.minakov.yandexraspintegration.model.mapper;
 
 import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.CountryDto;
 import com.minakov.yandexraspintegration.model.CountryEntity;
