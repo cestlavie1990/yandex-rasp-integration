@@ -8,7 +8,6 @@ import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
-import com.minakov.yandexraspintegration.model.embedded.YandexRaspKey;
 import com.minakov.yandexraspintegration.service.settlement.SettlementMapper;
 import java.util.List;
 import java.util.UUID;
@@ -24,26 +23,16 @@ class SettlementMapperTest {
     void beforeEach() {
         final var country = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .yandexRaspKey(YandexRaspKey.builder()
-                        .title("country-title")
-                        .code(CodeEmbedded.builder()
-                                .yandexCode("country-yandex-code")
-                                .esrCode("country-esr-code")
-                                .build())
-                        .build())
+                .title("country-title")
+                .code(CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build())
                 .build();
 
         REGION = RegionEntity.builder()
                 .id(UUID.randomUUID())
                 .country(country)
                 .countryId(country.getId())
-                .yandexRaspKey(YandexRaspKey.builder()
-                        .code(CodeEmbedded.builder()
-                                .yandexCode("region-yandex-code")
-                                .esrCode("region-esr-code")
-                                .build())
-                        .title("region-title")
-                        .build())
+                .title("region-title")
+                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
     }
 

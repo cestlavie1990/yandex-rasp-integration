@@ -37,7 +37,7 @@ class CountryControllerTest extends AbstractIT {
     @Test
     void getById() {
         final var id = countryTestHelper.create().toString();
-        final var title = countryTestHelper.get(UUID.fromString(id), e -> e.getYandexRaspKey().getTitle());
+        final var title = countryTestHelper.get(UUID.fromString(id), CountryEntity::getTitle);
 
         requestHelper.graphql(countryQuery, Map.of("id", id))
                 .statusCode(200)

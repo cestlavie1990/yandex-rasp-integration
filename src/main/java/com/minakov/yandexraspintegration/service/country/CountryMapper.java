@@ -16,9 +16,7 @@ public interface CountryMapper extends IMapper<CountryEntity, Country> {
     @Override
     @Mappings({
             @Mapping(target = "id", expression = "java(source.getId().toString())"),
-            @Mapping(target = "title", source = "source.yandexRaspKey.title"),
-            @Mapping(target = "code", source = "source.yandexRaspKey.code",
-                    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+            @Mapping(target = "code", source = "code", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     })
     Country map(final CountryEntity source);
 }

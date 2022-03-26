@@ -17,9 +17,7 @@ public interface RegionMapper extends IMapper<RegionEntity, Region> {
     @Mappings({
             @Mapping(target = "id", expression = "java(source.getId().toString())"),
             @Mapping(target = "countryId", expression = "java(source.getCountryId().toString())"),
-            @Mapping(target = "title", source = "source.yandexRaspKey.title"),
-            @Mapping(target = "code", source = "source.yandexRaspKey.code",
-                    nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+            @Mapping(target = "code", source = "code", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
     })
     Region map(final RegionEntity source);
 }

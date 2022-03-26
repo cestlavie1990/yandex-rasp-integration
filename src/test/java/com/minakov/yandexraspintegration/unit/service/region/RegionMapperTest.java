@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
-import com.minakov.yandexraspintegration.model.embedded.YandexRaspKey;
 import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import java.util.List;
 import java.util.UUID;
@@ -23,13 +22,8 @@ class RegionMapperTest {
     void beforeEach() {
         COUNTRY = CountryEntity.builder()
                 .id(UUID.randomUUID())
-                .yandexRaspKey(YandexRaspKey.builder()
-                        .title("country-title")
-                        .code(CodeEmbedded.builder()
-                                .yandexCode("country-yandex-code")
-                                .esrCode("country-esr-code")
-                                .build())
-                        .build())
+                .title("country-title")
+                .code(CodeEmbedded.builder().yandexCode("country-yandex-code").esrCode("country-esr-code").build())
                 .build();
     }
 
@@ -39,21 +33,16 @@ class RegionMapperTest {
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
-                .yandexRaspKey(YandexRaspKey.builder()
-                        .code(CodeEmbedded.builder()
-                                .yandexCode("region-yandex-code")
-                                .esrCode("region-esr-code")
-                                .build())
-                        .title("region-title")
-                        .build())
+                .title("region-title")
+                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getYandexRaspKey().getTitle(), dto.getTitle());
-        assertEquals(entity.getYandexRaspKey().getCode().getYandexCode(), dto.getCode().getYandexCode());
-        assertEquals(entity.getYandexRaspKey().getCode().getEsrCode(), dto.getCode().getEsrCode());
+        assertEquals(entity.getTitle(), dto.getTitle());
+        assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
+        assertEquals(entity.getCode().getEsrCode(), dto.getCode().getEsrCode());
         assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
     }
 
@@ -63,14 +52,14 @@ class RegionMapperTest {
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
-                .yandexRaspKey(
-                        YandexRaspKey.builder().code(CodeEmbedded.builder().build()).title("region-title").build())
+                .title("region-title")
+                .code(CodeEmbedded.builder().build())
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getYandexRaspKey().getTitle(), dto.getTitle());
+        assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
         assertNull(dto.getCode().getYandexCode());
         assertNull(dto.getCode().getEsrCode());
@@ -82,13 +71,8 @@ class RegionMapperTest {
                 .id(UUID.randomUUID())
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
-                .yandexRaspKey(YandexRaspKey.builder()
-                        .code(CodeEmbedded.builder()
-                                .yandexCode("region-yandex-code")
-                                .esrCode("region-esr-code")
-                                .build())
-                        .title("region-title")
-                        .build())
+                .title("region-title")
+                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
                 .build();
 
         final var dto = MAPPER.map(entity);

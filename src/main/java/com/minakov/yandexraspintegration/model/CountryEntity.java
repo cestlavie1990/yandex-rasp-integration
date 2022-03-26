@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.model;
 
-import com.minakov.yandexraspintegration.model.embedded.YandexRaspKey;
+import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +37,10 @@ public class CountryEntity extends AbstractAuditEntity implements IEntity<UUID> 
     private UUID id;
 
     @Embedded
-    private YandexRaspKey yandexRaspKey;
+    private CodeEmbedded code;
+
+    @Column(nullable = false)
+    private String title;
 
     @Builder.Default
     @EqualsAndHashCode.Exclude

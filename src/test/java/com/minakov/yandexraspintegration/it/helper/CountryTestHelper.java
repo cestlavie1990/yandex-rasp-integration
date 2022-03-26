@@ -2,7 +2,6 @@ package com.minakov.yandexraspintegration.it.helper;
 
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
-import com.minakov.yandexraspintegration.model.embedded.YandexRaspKey;
 import com.minakov.yandexraspintegration.repository.CountryRepository;
 import com.minakov.yandexraspintegration.repository.GenericRepository;
 import java.util.UUID;
@@ -21,10 +20,8 @@ public class CountryTestHelper extends AbstractTestHelper<UUID, CountryEntity> {
     @Override
     public @NonNull UUID create() {
         return repository.save(CountryEntity.builder()
-                .yandexRaspKey(YandexRaspKey.builder()
-                        .code(Default.CODE)
-                        .title(Default.TITLE.concat(UUID.randomUUID().toString()))
-                        .build())
+                .code(Default.CODE)
+                .title(Default.TITLE.concat(UUID.randomUUID().toString()))
                 .build()).getId();
     }
 
