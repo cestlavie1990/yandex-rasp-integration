@@ -17,7 +17,9 @@ public interface CountryEntityMapper extends IMapper<CountryDto, CountryEntity> 
 
     @Override
     @Mappings({
-            @Mapping(target = "id", ignore = true), @Mapping(target = "code", source = "codes")
+            @Mapping(target = "id", ignore = true), @Mapping(target = "code", source = "codes"),
+            @Mapping(target = "title",
+                    expression = "java(org.apache.commons.lang3.StringUtils.defaultIfBlank(source.getTitle(), null))")
     })
     CountryEntity map(final CountryDto source);
 

@@ -15,7 +15,9 @@ public interface StationEntityMapper extends IMapper<StationDto, StationEntity> 
     @Override
     @Mappings({
             @Mapping(target = "id", ignore = true), @Mapping(target = "settlement", ignore = true),
-            @Mapping(target = "settlementId", ignore = true), @Mapping(target = "code", source = "codes")
+            @Mapping(target = "settlementId", ignore = true), @Mapping(target = "code", source = "codes"),
+            @Mapping(target = "title",
+                    expression = "java(org.apache.commons.lang3.StringUtils.defaultIfBlank(source.getTitle(), null))")
     })
     StationEntity map(final StationDto source);
 }

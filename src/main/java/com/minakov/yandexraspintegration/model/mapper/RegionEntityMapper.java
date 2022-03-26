@@ -18,7 +18,9 @@ public interface RegionEntityMapper extends IMapper<RegionDto, RegionEntity> {
     @Override
     @Mappings({
             @Mapping(target = "id", ignore = true), @Mapping(target = "country", ignore = true),
-            @Mapping(target = "countryId", ignore = true), @Mapping(target = "code", source = "codes")
+            @Mapping(target = "countryId", ignore = true), @Mapping(target = "code", source = "codes"),
+            @Mapping(target = "title",
+                    expression = "java(org.apache.commons.lang3.StringUtils.defaultIfBlank(source.getTitle(), null))")
     })
     RegionEntity map(final RegionDto source);
 
