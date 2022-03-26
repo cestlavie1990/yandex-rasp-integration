@@ -102,7 +102,6 @@ class StationServiceTest extends AbstractIT {
         {
             final var results = service.getAllById(Set.of(DATA.getStationId2(), DATA.getStationId3()));
 
-            assertEquals(2, results.size());
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getStationId2().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getStationId3().toString())));
 
@@ -113,7 +112,6 @@ class StationServiceTest extends AbstractIT {
         {
             final var results = service.getAllById(Set.of(FAKE_UUID, DATA.getStationId1()));
 
-            assertEquals(1, results.size());
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getStationId1().toString())));
         }
     }
@@ -124,7 +122,6 @@ class StationServiceTest extends AbstractIT {
             final var results =
                     service.getAllById(Set.of(DATA.getStationId2(), DATA.getStationId3()), StationEntity::getId);
 
-            assertEquals(2, results.size());
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getStationId2())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getStationId3())));
 
@@ -135,7 +132,6 @@ class StationServiceTest extends AbstractIT {
         {
             final var results = service.getAllById(Set.of(FAKE_UUID, DATA.getStationId1()), StationEntity::getId);
 
-            assertEquals(1, results.size());
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getStationId1())));
         }
     }
@@ -145,7 +141,6 @@ class StationServiceTest extends AbstractIT {
         {
             final var results = service.getAll();
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getStationId1().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getStationId2().toString())));
             assertTrue(results.stream().anyMatch(result -> result.getId().equals(DATA.getStationId3().toString())));
@@ -153,7 +148,6 @@ class StationServiceTest extends AbstractIT {
         {
             final var results = service.getAll(StationEntity::getId);
 
-            assertEquals(3, results.size());
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getStationId1())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getStationId2())));
             assertTrue(results.stream().anyMatch(result -> result.equals(DATA.getStationId3())));

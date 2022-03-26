@@ -4,7 +4,10 @@ import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import com.minakov.yandexraspintegration.repository.CountryRepository;
 import com.minakov.yandexraspintegration.repository.GenericRepository;
+import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,6 +26,11 @@ public class CountryTestHelper extends AbstractTestHelper<UUID, CountryEntity> {
                 .code(Default.CODE)
                 .title(Default.TITLE.concat(UUID.randomUUID().toString()))
                 .build()).getId();
+    }
+
+    @Transactional(readOnly = true)
+    public <T> List<T> getAll(@NonNull final Function<CountryEntity, T> mapper) {
+        return repository.findAll().stream().map(mapper).collect(Collectors.toList());
     }
 
     @Override
