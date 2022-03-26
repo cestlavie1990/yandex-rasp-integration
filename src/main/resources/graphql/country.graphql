@@ -3,6 +3,10 @@ extend type Query {
     countries(filter: CountryFilter): [Country!]!
 }
 
+extend type Mutation {
+    refreshCountries: Int!
+}
+
 type Country {
     id: ID!
     code: Code

@@ -14,6 +14,7 @@ import java.util.UUID;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,11 @@ public class CountryController {
         final var filter = requestHelper.toObject(params, "filter", CountryFilter.class);
 
         return service.getAll(filter, CountryMapper.INSTANCE::map);
+    }
+
+    @MutationMapping
+    public Integer refreshCountries() {
+        return service.refreshAll();
     }
 
     @SchemaMapping
