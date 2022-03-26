@@ -1,9 +1,11 @@
 package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
+@Builder
 @RequiredArgsConstructor
 public class StationDto {
     private final CodeDto codes;
