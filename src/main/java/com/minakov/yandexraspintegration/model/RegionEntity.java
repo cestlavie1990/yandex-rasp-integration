@@ -50,7 +50,7 @@ public class RegionEntity extends AbstractAuditEntity implements IEntity<UUID> {
     @Embedded
     private CodeEmbedded code;
 
-    @Column(nullable = false)
+    @Column
     private String title;
 
     @Builder.Default

@@ -46,16 +46,16 @@ public class StationEntity extends AbstractAuditEntity implements IEntity<UUID> 
     @Embedded
     private CodeEmbedded code;
 
-    @Column(nullable = false)
+    @Column
     private String title;
 
-    @Column(nullable = false)
+    @Column
     private String direction;
 
-    @Column(nullable = false)
+    @Column
     private String stationType;
 
-    @Column(nullable = false)
+    @Column
     private String transportType;
 
     @Column

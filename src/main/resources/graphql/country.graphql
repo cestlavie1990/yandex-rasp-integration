@@ -5,8 +5,8 @@ extend type Query {
 
 type Country {
     id: ID!
-    code: Code!
-    title: String!
+    code: Code
+    title: String
     regions: [Region!]!
 }
 

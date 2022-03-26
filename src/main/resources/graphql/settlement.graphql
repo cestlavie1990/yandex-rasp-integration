@@ -5,7 +5,7 @@ extend type Query {
 
 type Settlement {
     id: ID!
-    code: Code!
-    title: String!
+    code: Code
+    title: String
     region: Region!
 }

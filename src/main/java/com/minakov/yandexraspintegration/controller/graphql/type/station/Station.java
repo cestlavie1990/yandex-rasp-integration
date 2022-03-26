@@ -13,11 +13,11 @@ import org.springframework.lang.Nullable;
 public class Station extends AbstractYandexRasp<String> {
     @NonNull
     private final String settlementId;
-    @NonNull
+    @Nullable
     private final String direction;
-    @NonNull
+    @Nullable
     private final String stationType;
-    @NonNull
+    @Nullable
     private final String transportType;
     @Nullable
     private final Double latitude;

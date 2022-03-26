@@ -6,7 +6,6 @@ import com.minakov.yandexraspintegration.service.IMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -15,8 +14,7 @@ public interface CountryMapper extends IMapper<CountryEntity, Country> {
 
     @Override
     @Mappings({
-            @Mapping(target = "id", expression = "java(source.getId().toString())"),
-            @Mapping(target = "code", source = "code", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+            @Mapping(target = "id", expression = "java(source.getId().toString())")
     })
     Country map(final CountryEntity source);
 }

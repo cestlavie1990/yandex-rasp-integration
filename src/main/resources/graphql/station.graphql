@@ -5,12 +5,12 @@ extend type Query {
 
 type Station {
     id: ID!
-    code: Code!
-    title: String!
+    code: Code
+    title: String
     latitude: Float
     longitude: Float
-    direction: String!
-    stationType: String!
-    transportType: String!
+    direction: String
+    stationType: String
+    transportType: String
     settlement: Settlement!
 }

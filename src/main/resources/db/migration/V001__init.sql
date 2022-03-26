@@ -4,10 +4,10 @@ CREATE TABLE "station" (
     "settlement_id"  UUID                        NOT NULL,
     "esr_code"       VARCHAR,
     "yandex_code"    VARCHAR,
-    "title"          VARCHAR                     NOT NULL,
-    "direction"      VARCHAR                     NOT NULL,
-    "station_type"   VARCHAR                     NOT NULL,
-    "transport_type" VARCHAR                     NOT NULL,
+    "title"          VARCHAR,
+    "direction"      VARCHAR,
+    "station_type"   VARCHAR,
+    "transport_type" VARCHAR,
     "latitude"       DOUBLE PRECISION,
     "longitude"      DOUBLE PRECISION,
     "created_at"     TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
@@ -20,7 +20,7 @@ CREATE TABLE "settlement" (
     "region_id"   UUID                        NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
-    "title"       VARCHAR                     NOT NULL,
+    "title"       VARCHAR,
     "created_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
@@ -31,7 +31,7 @@ CREATE TABLE "region" (
     "country_id"  UUID                        NOT NULL,
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
-    "title"       VARCHAR                     NOT NULL,
+    "title"       VARCHAR,
     "created_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
@@ -41,7 +41,7 @@ CREATE TABLE "country" (
     "id"          UUID                        NOT NULL DEFAULT "RANDOM_UUID"(),
     "esr_code"    VARCHAR,
     "yandex_code" VARCHAR,
-    "title"       VARCHAR                     NOT NULL,
+    "title"       VARCHAR,
     "created_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at"  TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );

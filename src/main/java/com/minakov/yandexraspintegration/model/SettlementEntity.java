@@ -50,7 +50,7 @@ public class SettlementEntity extends AbstractAuditEntity implements IEntity<UUI
     @Embedded
     private CodeEmbedded code;
 
-    @Column(nullable = false)
+    @Column
     private String title;
 
     @Builder.Default
