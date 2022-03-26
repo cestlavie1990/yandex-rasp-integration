@@ -1,6 +1,7 @@
 package com.minakov.yandexraspintegration.unit.service.station;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -65,6 +66,7 @@ class StationMapperTest {
 
         final var dto = MAPPER.map(entity);
 
+        assertNotNull(dto.getCode());
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
@@ -78,22 +80,19 @@ class StationMapperTest {
                 .id(UUID.randomUUID())
                 .settlement(SETTLEMENT)
                 .settlementId(SETTLEMENT.getId())
-                .title("station-title")
-                .code(CodeEmbedded.builder().build())
-                .direction("station-direction")
-                .stationType("station-station-type")
-                .transportType("station-transport-type")
-                .latitude(150.123)
-                .longitude(-11.4567)
                 .build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getSettlement().getId().toString(), dto.getSettlementId());
-        assertNull(dto.getCode().getYandexCode());
-        assertNull(dto.getCode().getEsrCode());
+        assertNull(dto.getCode());
+        assertNull(dto.getTitle());
+        assertNull(dto.getDirection());
+        assertNull(dto.getStationType());
+        assertNull(dto.getTransportType());
+        assertNull(dto.getLatitude());
+        assertNull(dto.getLongitude());
     }
 
     @Test

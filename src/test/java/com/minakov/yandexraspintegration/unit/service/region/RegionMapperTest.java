@@ -1,6 +1,7 @@
 package com.minakov.yandexraspintegration.unit.service.region;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,6 +40,7 @@ class RegionMapperTest {
 
         final var dto = MAPPER.map(entity);
 
+        assertNotNull(dto.getCode());
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
@@ -48,21 +50,15 @@ class RegionMapperTest {
 
     @Test
     void toDto_withNull() {
-        final var entity = RegionEntity.builder()
-                .id(UUID.randomUUID())
-                .country(COUNTRY)
-                .countryId(COUNTRY.getId())
-                .title("region-title")
-                .code(CodeEmbedded.builder().build())
-                .build();
+        final var entity =
+                RegionEntity.builder().id(UUID.randomUUID()).country(COUNTRY).countryId(COUNTRY.getId()).build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
-        assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCountry().getId().toString(), dto.getCountryId());
-        assertNull(dto.getCode().getYandexCode());
-        assertNull(dto.getCode().getEsrCode());
+        assertNull(dto.getCode());
+        assertNull(dto.getTitle());
     }
 
     @Test
@@ -72,7 +68,7 @@ class RegionMapperTest {
                 .country(COUNTRY)
                 .countryId(COUNTRY.getId())
                 .title("region-title")
-                .code(CodeEmbedded.builder().yandexCode("region-yandex-code").esrCode("region-esr-code").build())
+                .code(CodeEmbedded.builder().build())
                 .build();
 
         final var dto = MAPPER.map(entity);

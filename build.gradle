@@ -61,6 +61,7 @@ dependencies {
 
     implementation "org.projectlombok:lombok:${project.ext.lombokVersion}"
     implementation "org.mapstruct:mapstruct:${project.ext.mapStructVersion}"
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
     //end region
 
     //region test

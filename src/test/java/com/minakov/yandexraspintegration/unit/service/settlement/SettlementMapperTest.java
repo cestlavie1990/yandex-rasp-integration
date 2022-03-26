@@ -1,6 +1,7 @@
 package com.minakov.yandexraspintegration.unit.service.settlement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -51,6 +52,7 @@ class SettlementMapperTest {
 
         final var dto = MAPPER.map(entity);
 
+        assertNotNull(dto.getCode());
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getCode().getYandexCode(), dto.getCode().getYandexCode());
@@ -60,21 +62,16 @@ class SettlementMapperTest {
 
     @Test
     void toDto_withNull() {
-        final var entity = SettlementEntity.builder()
-                .id(UUID.randomUUID())
-                .region(REGION)
-                .regionId(REGION.getId())
-                .title("settlement-title")
-                .code(CodeEmbedded.builder().build())
-                .build();
+        final var entity =
+                SettlementEntity.builder().id(UUID.randomUUID()).region(REGION).regionId(REGION.getId()).build();
 
         final var dto = MAPPER.map(entity);
 
         assertEquals(entity.getId().toString(), dto.getId());
         assertEquals(entity.getTitle(), dto.getTitle());
         assertEquals(entity.getRegion().getId().toString(), dto.getRegionId());
-        assertNull(dto.getCode().getYandexCode());
-        assertNull(dto.getCode().getEsrCode());
+        assertNull(dto.getTitle());
+        assertNull(dto.getCode());
     }
 
     @Test
@@ -84,10 +81,7 @@ class SettlementMapperTest {
                 .region(REGION)
                 .regionId(REGION.getId())
                 .title("settlement-title")
-                .code(CodeEmbedded.builder()
-                        .yandexCode("settlement-yandex-code")
-                        .esrCode("settlement-esr-code")
-                        .build())
+                .code(CodeEmbedded.builder().build())
                 .build();
 
         final var dto = MAPPER.map(entity);
