@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 
 @SpringBootIT
-class CountryControllerTest extends AbstractIT {
+class CountryControllerQueryTest extends AbstractIT {
     @Value("classpath:data/controller/graphql/country/country.graphql")
     private Resource countryQuery;
     @Value("classpath:data/controller/graphql/country/countries.graphql")
