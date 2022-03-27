@@ -10,9 +10,7 @@ import org.springframework.lang.Nullable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StringCriteria implements ICriteria {
+public class UUIDCriteria implements ICriteria {
     @Nullable
-    private StringCriteriaValue in;
-    @Nullable
-    private StringCriteriaValue like;
+    private UUIDCriteriaValue in;
 }

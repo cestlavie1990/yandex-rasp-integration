@@ -2,6 +2,7 @@ package com.minakov.yandexraspintegration.controller.graphql.input.filter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,10 +13,10 @@ import lombok.NonNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StringCriteriaValue implements ICriteriaValue<String> {
+public class UUIDCriteriaValue implements ICriteriaValue<UUID> {
     @Builder.Default
     @NonNull
-    private List<String> values = new ArrayList<>();
+    private List<UUID> values = new ArrayList<>();
 
     @Builder.Default
     @NonNull

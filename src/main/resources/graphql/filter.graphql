@@ -7,3 +7,12 @@ input StringCriteriaValue {
     values: [String!]!
     inverse: Boolean! = false
 }
+
+input UUIDCriteria {
+    in: UUIDCriteriaValue
+}
+
+input UUIDCriteriaValue {
+    values: [ID!]!
+    inverse: Boolean! = false
+}
