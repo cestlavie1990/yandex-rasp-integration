@@ -29,7 +29,7 @@ public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extend
     private final F filter;
 
     @NonNull
-    protected List<Pair<? super ICriteria, List<Attribute<E, ?>>>> getCriteria(@Nullable final F filter) {
+    protected List<Pair<? super ICriteria, List<Attribute<?, ?>>>> getCriteria(@Nullable final F filter) {
         return Collections.emptyList();
     }
 
@@ -66,9 +66,9 @@ public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extend
         });
     }
 
-    private Path<?> getAttribute(final Root<E> root, final List<Attribute<E, ?>> paths) {
+    private Path<?> getAttribute(final Root<E> root, final List<Attribute<?, ?>> paths) {
         Path<?> result = null;
-        for (Attribute<E, ?> path : paths) {
+        for (Attribute<?, ?> path : paths) {
             result = result == null ? root.get(path.getName()) : result.get(path.getName());
         }
         return result;

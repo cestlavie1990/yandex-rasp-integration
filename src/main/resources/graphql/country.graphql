@@ -17,4 +17,5 @@ type Country {
 input CountryFilter {
     id: UUIDCriteria
     title: StringCriteria
+    code: CodeFilter
 }

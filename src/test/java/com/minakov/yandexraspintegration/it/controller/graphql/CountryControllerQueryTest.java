@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 
+import com.minakov.yandexraspintegration.controller.graphql.input.code.CodeFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.country.CountryFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteria;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteriaValue;
@@ -15,6 +16,7 @@ import com.minakov.yandexraspintegration.it.AbstractIT;
 import com.minakov.yandexraspintegration.it.SpringBootIT;
 import com.minakov.yandexraspintegration.it.helper.CountryTestHelper;
 import com.minakov.yandexraspintegration.model.CountryEntity;
+import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -222,5 +224,189 @@ class CountryControllerQueryTest extends AbstractIT {
                 .assertThat()
                 .body("errors", nullValue())
                 .body("data.countries.id", hasItems(id1.toString(), id2.toString()));
+    }
+
+    @Test
+    void filterByEsrCodeIn() {
+        final var id1 = countryTestHelper.create();
+        final var id2 = countryTestHelper.create();
+        final var id3 = countryTestHelper.create();
+
+        final var esrCode1 = "esr-code-".concat(id1.toString());
+        final var esrCode2 = "esr-code-".concat(id2.toString());
+        final var esrCode3 = "esr-code-".concat(id3.toString());
+
+        countryTestHelper.update(id1, e -> e.setCode(CodeEmbedded.builder().esrCode(esrCode1).build()));
+        countryTestHelper.update(id2, e -> e.setCode(CodeEmbedded.builder().esrCode(esrCode2).build()));
+        countryTestHelper.update(id3, e -> e.setCode(CodeEmbedded.builder().esrCode(esrCode3).build()));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .esrCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder().values(List.of(esrCode1, esrCode2)).build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString()))
+                .body("data.countries.id", not(hasItems(id3.toString())));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .esrCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder()
+                                                .values(List.of(esrCode1, esrCode2))
+                                                .inverse(true)
+                                                .build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", not(hasItems(id1.toString(), id2.toString())))
+                .body("data.countries.id", hasItems(id3.toString()));
+
+        // @formatter:off
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .esrCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder()
+                                                .values(List.of())
+                                                .build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries", empty());
+        // @formatter:on
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .esrCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder().values(List.of()).inverse(true).build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString(), id3.toString()));
+    }
+
+    @Test
+    void filterByYandexCodeIn() {
+        final var id1 = countryTestHelper.create();
+        final var id2 = countryTestHelper.create();
+        final var id3 = countryTestHelper.create();
+
+        final var yandexCode1 = "yandex-code-".concat(id1.toString());
+        final var yandexCode2 = "yandex-code-".concat(id2.toString());
+        final var yandexCode3 = "yandex-code-".concat(id3.toString());
+
+        countryTestHelper.update(id1, e -> e.setCode(CodeEmbedded.builder().yandexCode(yandexCode1).build()));
+        countryTestHelper.update(id2, e -> e.setCode(CodeEmbedded.builder().yandexCode(yandexCode2).build()));
+        countryTestHelper.update(id3, e -> e.setCode(CodeEmbedded.builder().yandexCode(yandexCode3).build()));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .yandexCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder().values(List.of(yandexCode1, yandexCode2)).build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString()))
+                .body("data.countries.id", not(hasItems(id3.toString())));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .yandexCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder()
+                                                .values(List.of(yandexCode1, yandexCode2))
+                                                .inverse(true)
+                                                .build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", not(hasItems(id1.toString(), id2.toString())))
+                .body("data.countries.id", hasItems(id3.toString()));
+
+        // @formatter:off
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .yandexCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder()
+                                                .values(List.of())
+                                                .build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries", empty());
+        // @formatter:on
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .yandexCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder().values(List.of()).inverse(true).build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString(), id3.toString()));
+    }
+
+    @Test
+    void filterByYandexBothCodes() {
+        final var id1 = countryTestHelper.create();
+        final var id2 = countryTestHelper.create();
+        final var id3 = countryTestHelper.create();
+
+        final var esrCode1 = "esr-code-".concat(id1.toString());
+        final var esrCode2 = "esr-code-".concat(id2.toString());
+        final var esrCode3 = "esr-code-".concat(id3.toString());
+
+        final var yandexCode1 = "yandex-code-".concat(id1.toString());
+        final var yandexCode2 = "yandex-code-".concat(id2.toString());
+        final var yandexCode3 = "yandex-code-".concat(id3.toString());
+
+        countryTestHelper.update(id1,
+                e -> e.setCode(CodeEmbedded.builder().yandexCode(yandexCode1).esrCode(esrCode1).build()));
+        countryTestHelper.update(id2,
+                e -> e.setCode(CodeEmbedded.builder().yandexCode(yandexCode2).esrCode(esrCode2).build()));
+        countryTestHelper.update(id3,
+                e -> e.setCode(CodeEmbedded.builder().yandexCode(yandexCode3).esrCode(esrCode3).build()));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .code(CodeFilter.builder()
+                                .yandexCode(StringCriteria.builder()
+                                        .in(StringCriteriaValue.builder().values(List.of(yandexCode1, yandexCode2)).build())
+                                        .build())
+                                .esrCode(StringCriteria.builder()
+                                        .like(StringCriteriaValue.builder()
+                                                .values(List.of("%".concat(id2.toString()).concat("%")))
+                                                .build())
+                                        .build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id2.toString()))
+                .body("data.countries.id", not(hasItems(id1.toString(), id3.toString())));
     }
 }

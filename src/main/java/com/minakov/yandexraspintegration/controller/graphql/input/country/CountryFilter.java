@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.controller.graphql.input.country;
 
+import com.minakov.yandexraspintegration.controller.graphql.input.code.CodeFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.IFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteria;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.UUIDCriteria;
@@ -18,4 +19,6 @@ public class CountryFilter implements IFilter<CountryFilter> {
     private UUIDCriteria id;
     @Nullable
     private StringCriteria title;
+    @Nullable
+    private CodeFilter code;
 }
