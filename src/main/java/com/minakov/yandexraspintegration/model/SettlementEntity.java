@@ -32,7 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "settlement")
-public class SettlementEntity extends AbstractAuditEntity implements IEntity<UUID> {
+public class SettlementEntity extends AbstractAuditEntity implements IYandexRaspEntity {
     @Id
     @GeneratedValue
     @Column(updatable = false)
