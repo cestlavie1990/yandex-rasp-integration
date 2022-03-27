@@ -21,8 +21,9 @@ public class CriteriaUtil {
             predicate = CriteriaValueUtil.getIn(path, criteria.getIn().getValues(), criteria.getIn().getInverse());
         }
         if (criteria.getLike() != null) {
-            predicate = builder.and(predicate, CriteriaValueUtil.getLike(builder, path, criteria.getLike().getValues(),
-                    criteria.getLike().getInverse()));
+            final var like = CriteriaValueUtil.getLike(builder, path, criteria.getLike().getValues(),
+                    criteria.getLike().getInverse());
+            predicate = predicate == null ? like : builder.and(predicate, like);
         }
         return predicate;
     }

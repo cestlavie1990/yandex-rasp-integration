@@ -17,7 +17,9 @@ public class CriteriaValueUtil {
     @NonNull
     public static Predicate getLike(@NonNull final CriteriaBuilder builder, @NonNull final Path<String> path,
             final List<String> values, boolean inverse) {
-        final var predicate = builder.or(values.stream().map(val -> builder.like(path, val)).toArray(Predicate[]::new));
+        final var predicate = builder.or(values.stream()
+                .map(val -> builder.like(builder.upper(path), val.toUpperCase()))
+                .toArray(Predicate[]::new));
 
         return inverse ? predicate.not() : predicate;
     }
