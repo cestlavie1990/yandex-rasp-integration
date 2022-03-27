@@ -17,6 +17,7 @@ import com.minakov.yandexraspintegration.it.helper.CountryTestHelper;
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
@@ -64,15 +65,13 @@ class CountryControllerQueryTest extends AbstractIT {
     }
 
     @Test
-    void filterById() {
+    void filterByIdIn() {
         final var id1 = countryTestHelper.create();
         final var id2 = countryTestHelper.create();
         final var id3 = countryTestHelper.create();
 
         requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
-                        .id(UUIDCriteria.builder()
-                                .in(UUIDCriteriaValue.builder().values(List.of(id1, id2)).build())
-                                .build())
+                        .id(UUIDCriteria.builder().in(UUIDCriteriaValue.builder().values(List.of(id1, id2)).build()).build())
                         .build()))
                 .statusCode(200)
                 .assertThat()
@@ -118,5 +117,110 @@ class CountryControllerQueryTest extends AbstractIT {
                 .assertThat()
                 .body("errors", nullValue())
                 .body("data.countries.id", hasItems(id1.toString(), id2.toString(), id3.toString()));
+    }
+
+    @Test
+    void filterByTitleIn() {
+        final var id1 = countryTestHelper.create();
+        final var id2 = countryTestHelper.create();
+        final var id3 = countryTestHelper.create();
+
+        final var title1 = Objects.requireNonNull(countryTestHelper.get(id1, CountryEntity::getTitle));
+        final var title2 = Objects.requireNonNull(countryTestHelper.get(id2, CountryEntity::getTitle));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .in(StringCriteriaValue.builder().values(List.of(title1, title2)).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString()))
+                .body("data.countries.id", not(hasItems(id3.toString())));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .in(StringCriteriaValue.builder().values(List.of(title1, title2)).inverse(true).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", not(hasItems(id1.toString(), id2.toString())))
+                .body("data.countries.id", hasItems(id3.toString()));
+
+        // @formatter:off
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .in(StringCriteriaValue.builder().values(List.of()).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries", empty());
+        // @formatter:on
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .in(StringCriteriaValue.builder().values(List.of()).inverse(true).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString(), id3.toString()));
+    }
+
+    @Test
+    void filterByTitleLike() {
+        final var id1 = countryTestHelper.create();
+        final var id2 = countryTestHelper.create();
+
+        countryTestHelper.update(id1, e -> e.setTitle("title-".concat(id1.toString())));
+        countryTestHelper.update(id2, e -> e.setTitle("title-".concat(id2.toString())));
+
+        final var likeTitle = "%".concat(id1.toString()).concat("%");
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .like(StringCriteriaValue.builder().values(List.of(likeTitle)).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString()))
+                .body("data.countries.id", not(hasItems(id2.toString())));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .like(StringCriteriaValue.builder().values(List.of(likeTitle)).inverse(true).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", not(hasItems(id1.toString())))
+                .body("data.countries.id", hasItems(id2.toString()));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder().like(StringCriteriaValue.builder().values(List.of()).build()).build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", not(hasItems(id1.toString(), id2.toString())));
+
+        requestHelper.graphql(countriesFilteredQuery, Map.of("filter", CountryFilter.builder()
+                        .title(StringCriteria.builder()
+                                .like(StringCriteriaValue.builder().values(List.of()).inverse(true).build())
+                                .build())
+                        .build()))
+                .statusCode(200)
+                .assertThat()
+                .body("errors", nullValue())
+                .body("data.countries.id", hasItems(id1.toString(), id2.toString()));
     }
 }
