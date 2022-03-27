@@ -6,7 +6,9 @@ import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.repository.GenericRepository;
 import com.minakov.yandexraspintegration.repository.RegionRepository;
 import com.minakov.yandexraspintegration.service.AbstractEntityService;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -24,9 +26,12 @@ public class RegionService extends AbstractEntityService<UUID, Region, RegionEnt
     private final RegionRepository repository;
 
     @Transactional(readOnly = true)
-    public <T> List<T> getAllByCountryId(@NonNull final UUID countryId,
+    @NonNull
+    public <T> Map<UUID, List<T>> getMapByCountryIdIn(@NonNull final Collection<UUID> countryIds,
             @NonNull final Function<RegionEntity, T> mapper) {
-        return repository.findAllByCountryId(countryId).map(mapper).collect(Collectors.toList());
+        return repository.findAllByCountryIdIn(countryIds)
+                .collect(Collectors.groupingBy(RegionEntity::getCountryId,
+                        Collectors.mapping(mapper, Collectors.toList())));
     }
 
     @Override

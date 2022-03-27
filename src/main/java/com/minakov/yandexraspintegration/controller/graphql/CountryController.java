@@ -8,15 +8,17 @@ import com.minakov.yandexraspintegration.service.country.CountryMapper;
 import com.minakov.yandexraspintegration.service.country.CountryService;
 import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import com.minakov.yandexraspintegration.service.region.RegionService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -47,8 +49,13 @@ public class CountryController {
         return service.refreshAll();
     }
 
-    @SchemaMapping
-    public List<Region> regions(final Country country) {
-        return regionService.getAllByCountryId(UUID.fromString(country.getId()), RegionMapper.INSTANCE::map);
+    @BatchMapping
+    public Map<Country, List<Region>> regions(final List<Country> countries) {
+        final var countryIds = countries.stream().map(c -> UUID.fromString(c.getId())).collect(Collectors.toSet());
+
+        final var regionMap = regionService.getMapByCountryIdIn(countryIds, RegionMapper.INSTANCE::map);
+
+        return countries.stream()
+                .collect(HashMap::new, (m, v) -> m.put(v, regionMap.get(UUID.fromString(v.getId()))), HashMap::putAll);
     }
 }
