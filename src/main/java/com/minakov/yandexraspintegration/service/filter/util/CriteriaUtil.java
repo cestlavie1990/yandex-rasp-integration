@@ -1,12 +1,11 @@
 package com.minakov.yandexraspintegration.service.filter.util;
 
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteria;
+import com.minakov.yandexraspintegration.controller.graphql.input.filter.UUIDCriteria;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.SingularAttribute;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.springframework.lang.Nullable;
@@ -14,10 +13,8 @@ import org.springframework.lang.Nullable;
 @UtilityClass
 public class CriteriaUtil {
     @Nullable
-    public static <E> Predicate getStringPredicate(@NonNull final StringCriteria criteria, @NonNull final Root<E> root,
-            @NonNull final SingularAttribute<E, String> attr, @NonNull final CriteriaBuilder builder) {
-        final var path = root.get(attr);
-
+    public static Predicate getStringPredicate(@NonNull final StringCriteria criteria, @NonNull final Path<String> path,
+            @NonNull final CriteriaBuilder builder) {
         Predicate predicate = null;
 
         if (criteria.getIn() != null) {
@@ -31,16 +28,11 @@ public class CriteriaUtil {
     }
 
     @Nullable
-    public static <E> Predicate getUUIDPredicate(@NonNull final StringCriteria criteria, @NonNull final Root<E> root,
-            @NonNull final SingularAttribute<E, UUID> attr, @NonNull final CriteriaBuilder builder) {
-        final var path = root.get(attr);
-
+    public static Predicate getUUIDPredicate(@NonNull final UUIDCriteria criteria, @NonNull final Path<UUID> path) {
         Predicate predicate = null;
 
         if (criteria.getIn() != null) {
-            predicate = CriteriaValueUtil.getIn(path,
-                    criteria.getIn().getValues().stream().map(UUID::fromString).collect(Collectors.toList()),
-                    criteria.getIn().getInverse());
+            predicate = CriteriaValueUtil.getIn(path, criteria.getIn().getValues(), criteria.getIn().getInverse());
         }
         return predicate;
     }
