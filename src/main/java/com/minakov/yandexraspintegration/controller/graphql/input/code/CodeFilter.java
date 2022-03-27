@@ -12,7 +12,7 @@ import org.springframework.lang.Nullable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CodeFilter implements IFilter<CodeFilter> {
+public class CodeFilter implements IFilter {
     @Nullable
     private StringCriteria esrCode;
     @Nullable

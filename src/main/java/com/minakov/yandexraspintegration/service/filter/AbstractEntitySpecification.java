@@ -24,7 +24,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.lang.Nullable;
 
 @RequiredArgsConstructor
-public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extends IFilter<F>> implements Specification<E> {
+public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extends IFilter> implements Specification<E> {
     @Nullable
     private final F filter;
 
