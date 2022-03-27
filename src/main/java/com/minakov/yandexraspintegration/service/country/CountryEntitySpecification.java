@@ -4,6 +4,7 @@ import com.minakov.yandexraspintegration.controller.graphql.input.country.Countr
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.ICriteria;
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.service.AbstractYandexRaspEntitySpecification;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.metamodel.Attribute;
 import lombok.NonNull;
@@ -16,7 +17,7 @@ public class CountryEntitySpecification extends AbstractYandexRaspEntitySpecific
     }
 
     @Override
-    protected @NonNull List<Pair<? super ICriteria, List<Attribute<?, ?>>>> getCriteria(
+    public @NonNull List<Pair<? super ICriteria, LinkedList<Attribute<?, ?>>>> getCriteria(
             @Nullable CountryFilter filter) {
         return super.getCriteria(filter);
     }

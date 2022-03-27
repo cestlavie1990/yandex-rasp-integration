@@ -7,6 +7,7 @@ import com.minakov.yandexraspintegration.model.IYandexRaspEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded_;
 import com.minakov.yandexraspintegration.service.filter.AbstractEntitySpecification;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.metamodel.Attribute;
 import lombok.NonNull;
@@ -19,23 +20,33 @@ public abstract class AbstractYandexRaspEntitySpecification<E extends IYandexRas
     }
 
     @Override
-    protected @NonNull List<Pair<? super ICriteria, List<Attribute<?, ?>>>> getCriteria(@Nullable F filter) {
-        final var criteria = new ArrayList<Pair<? super ICriteria, List<Attribute<?, ?>>>>();
+    public @NonNull List<Pair<? super ICriteria, LinkedList<Attribute<?, ?>>>> getCriteria(@Nullable F filter) {
+        final var criteria = new ArrayList<Pair<? super ICriteria, LinkedList<Attribute<?, ?>>>>();
 
         if (filter != null) {
             if (filter.getId() != null) {
-                criteria.add(Pair.of(filter.getId(), List.of(CountryEntity_.id)));
+                criteria.add(Pair.of(filter.getId(), new LinkedList<>() {{
+                    add(CountryEntity_.id);
+                }}));
             }
             if (filter.getTitle() != null) {
-                criteria.add(Pair.of(filter.getTitle(), List.of(CountryEntity_.title)));
+                criteria.add(Pair.of(filter.getTitle(), new LinkedList<>() {{
+                    add(CountryEntity_.title);
+                }}));
             }
             if (filter.getCode() != null) {
                 final var code = filter.getCode();
                 if (code.getEsrCode() != null) {
-                    criteria.add(Pair.of(code.getEsrCode(), List.of(CountryEntity_.code, CodeEmbedded_.esrCode)));
+                    criteria.add(Pair.of(code.getEsrCode(), new LinkedList<>() {{
+                        add(CountryEntity_.code);
+                        add(CodeEmbedded_.esrCode);
+                    }}));
                 }
                 if (code.getYandexCode() != null) {
-                    criteria.add(Pair.of(code.getYandexCode(), List.of(CountryEntity_.code, CodeEmbedded_.yandexCode)));
+                    criteria.add(Pair.of(code.getYandexCode(), new LinkedList<>() {{
+                        add(CountryEntity_.code);
+                        add(CodeEmbedded_.yandexCode);
+                    }}));
                 }
             }
         }

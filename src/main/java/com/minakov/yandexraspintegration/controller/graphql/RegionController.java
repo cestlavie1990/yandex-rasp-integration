@@ -1,8 +1,11 @@
 package com.minakov.yandexraspintegration.controller.graphql;
 
+import com.minakov.yandexraspintegration.controller.RequestHelper;
+import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.country.Country;
 import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
 import com.minakov.yandexraspintegration.service.country.CountryService;
+import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import com.minakov.yandexraspintegration.service.region.RegionService;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +27,8 @@ public class RegionController {
     private final RegionService service;
     @NonNull
     private final CountryService countryService;
+    @NonNull
+    private final RequestHelper requestHelper;
 
     @QueryMapping
     public Region region(@Argument final UUID id) {
@@ -31,8 +36,10 @@ public class RegionController {
     }
 
     @QueryMapping
-    public List<Region> regions() {
-        return service.getAll();
+    public List<Region> regions(@Argument final Map<String, Object> params) {
+        final var filter = requestHelper.toObject(params, "filter", RegionFilter.class);
+
+        return service.getAll(filter, RegionMapper.INSTANCE::map);
     }
 
     @BatchMapping

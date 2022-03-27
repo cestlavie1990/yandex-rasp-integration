@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.service.region;
 
+import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
 import com.minakov.yandexraspintegration.exception.RegionNotFoundException;
 import com.minakov.yandexraspintegration.model.RegionEntity;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,15 @@ public class RegionService extends AbstractEntityService<UUID, Region, RegionEnt
         return repository.findAllByCountryIdIn(countryIds)
                 .collect(Collectors.groupingBy(RegionEntity::getCountryId,
                         Collectors.mapping(mapper, Collectors.toList())));
+    }
+
+    @Transactional(readOnly = true)
+    @NonNull
+    public <T> List<T> getAll(@Nullable final RegionFilter filter, @NonNull final Function<RegionEntity, T> mapper) {
+        return repository.findAll(new RegionEntitySpecification(filter))
+                .stream()
+                .map(mapper)
+                .collect(Collectors.toList());
     }
 
     @Override

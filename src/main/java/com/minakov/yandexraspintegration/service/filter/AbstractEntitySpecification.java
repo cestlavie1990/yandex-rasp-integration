@@ -8,6 +8,7 @@ import com.minakov.yandexraspintegration.model.IEntity;
 import com.minakov.yandexraspintegration.service.filter.util.CriteriaUtil;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -29,8 +30,8 @@ public abstract class AbstractEntitySpecification<E extends IEntity<?>, F extend
     private final F filter;
 
     @NonNull
-    protected List<Pair<? super ICriteria, List<Attribute<?, ?>>>> getCriteria(@Nullable final F filter) {
-        return Collections.emptyList();
+    public List<Pair<? super ICriteria, LinkedList<Attribute<?, ?>>>> getCriteria(@Nullable final F filter) {
+        return new ArrayList<>();
     }
 
     @Nullable

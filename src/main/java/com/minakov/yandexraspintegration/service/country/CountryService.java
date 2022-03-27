@@ -35,7 +35,7 @@ public class CountryService extends AbstractEntityService<UUID, Country, Country
 
     @Transactional(readOnly = true)
     @NonNull
-    public <T> List<T> getAll(@Nullable final CountryFilter filter, @NonNull Function<CountryEntity, T> mapper) {
+    public <T> List<T> getAll(@Nullable final CountryFilter filter, @NonNull final Function<CountryEntity, T> mapper) {
         return repository.findAll(new CountryEntitySpecification(filter))
                 .stream()
                 .map(mapper)

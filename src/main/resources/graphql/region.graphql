@@ -1,6 +1,6 @@
 extend type Query {
     region(id: ID!): Region!
-    regions: [Region!]!
+    regions(filter: RegionFilter): [Region!]!
 }
 
 type Region {
@@ -8,4 +8,11 @@ type Region {
     code: Code
     title: String
     country: Country!
+}
+
+input RegionFilter {
+    id: UUIDCriteria
+    title: StringCriteria
+    code: CodeFilter
+    country: CountryFilter
 }
