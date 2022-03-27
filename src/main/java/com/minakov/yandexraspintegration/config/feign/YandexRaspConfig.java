@@ -11,6 +11,7 @@ import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class YandexRaspConfig {
 
     @Bean
-    public YandexRaspClient yandexRaspClient(@NonNull final ObjectMapper objectMapper,
+    public YandexRaspClient yandexRaspClient(@NonNull @Qualifier("snakeCaseMapper") final ObjectMapper objectMapper,
             @NonNull final YandexRaspProperties prop) {
         return Feign.builder()
                 .client(new OkHttpClient())
