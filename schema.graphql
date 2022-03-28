@@ -2,6 +2,7 @@
 
 schema {
     query: Query
+    mutation: Mutation
 }
 
 type Code {
@@ -10,17 +11,21 @@ type Code {
 }
 
 type Country {
-    code: Code!
+    code: Code
     id: ID!
     regions: [Region!]!
-    title: String!
+    title: String
+}
+
+type Mutation {
+    refreshCountries: Int!
 }
 
 type Query {
     countries(filter: CountryFilter): [Country!]!
     country(id: ID!): Country!
     region(id: ID!): Region!
-    regions: [Region!]!
+    regions(filter: RegionFilter): [Region!]!
     settlement(id: ID!): Settlement!
     settlements: [Settlement!]!
     station(id: ID!): Station!
@@ -28,33 +33,46 @@ type Query {
 }
 
 type Region {
-    code: Code!
+    code: Code
     country: Country!
     id: ID!
-    title: String!
+    title: String
 }
 
 type Settlement {
-    code: Code!
+    code: Code
     id: ID!
     region: Region!
-    title: String!
+    title: String
 }
 
 type Station {
-    code: Code!
-    direction: String!
+    code: Code
+    direction: String
     id: ID!
-    latitude: Float!
-    longitude: Float!
+    latitude: Float
+    longitude: Float
     settlement: Settlement!
-    stationType: String!
-    title: String!
-    transportType: String!
+    stationType: String
+    title: String
+    transportType: String
+}
+
+input CodeFilter {
+    esrCode: StringCriteria
+    yandexCode: StringCriteria
 }
 
 input CountryFilter {
-    id: StringCriteria
+    code: CodeFilter
+    id: UUIDCriteria
+    title: StringCriteria
+}
+
+input RegionFilter {
+    code: CodeFilter
+    country: CountryFilter
+    id: UUIDCriteria
     title: StringCriteria
 }
 
@@ -66,4 +84,13 @@ input StringCriteria {
 input StringCriteriaValue {
     inverse: Boolean! = false
     values: [String!]!
+}
+
+input UUIDCriteria {
+    in: UUIDCriteriaValue
+}
+
+input UUIDCriteriaValue {
+    inverse: Boolean! = false
+    values: [ID!]!
 }
