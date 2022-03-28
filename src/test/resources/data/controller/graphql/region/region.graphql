@@ -1,0 +1,13 @@
+query getRegion($id: ID!){
+    region(id: $id) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        country {
+            id
+        }
+    }
+}

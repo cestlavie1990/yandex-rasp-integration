@@ -4,8 +4,8 @@ import com.minakov.yandexraspintegration.controller.graphql.input.filter.ICriter
 import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionFilter;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.model.RegionEntity_;
+import com.minakov.yandexraspintegration.service.AbstractYandexRaspEntitySpecification;
 import com.minakov.yandexraspintegration.service.country.CountryEntitySpecification;
-import com.minakov.yandexraspintegration.service.filter.AbstractEntitySpecification;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.metamodel.Attribute;
@@ -13,7 +13,7 @@ import lombok.NonNull;
 import org.springframework.data.util.Pair;
 import org.springframework.lang.Nullable;
 
-public class RegionEntitySpecification extends AbstractEntitySpecification<RegionEntity, RegionFilter> {
+public class RegionEntitySpecification extends AbstractYandexRaspEntitySpecification<RegionEntity, RegionFilter> {
     public RegionEntitySpecification(@Nullable RegionFilter filter) {
         super(filter);
     }

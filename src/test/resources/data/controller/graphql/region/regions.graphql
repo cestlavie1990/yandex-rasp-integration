@@ -1,0 +1,13 @@
+{
+    regions {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        country {
+            id
+        }
+    }
+}

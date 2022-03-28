@@ -1,0 +1,13 @@
+query getRegions($filter: RegionFilter){
+    regions(filter: $filter) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        country {
+            id
+        }
+    }
+}
