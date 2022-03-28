@@ -1,7 +1,7 @@
 package com.minakov.yandexraspintegration.controller.graphql.input.settlement;
 
 import com.minakov.yandexraspintegration.controller.graphql.input.code.CodeFilter;
-import com.minakov.yandexraspintegration.controller.graphql.input.filter.IYandexRaspFilter;
+import com.minakov.yandexraspintegration.controller.graphql.input.filter.IYandexStationFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteria;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.UUIDCriteria;
 import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionFilter;
@@ -15,7 +15,7 @@ import org.springframework.lang.Nullable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SettlementFilter implements IYandexRaspFilter {
+public class SettlementFilter implements IYandexStationFilter {
     @Nullable
     private UUIDCriteria id;
     @Nullable

@@ -1,9 +1,9 @@
 package com.minakov.yandexraspintegration.service;
 
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.ICriteria;
-import com.minakov.yandexraspintegration.controller.graphql.input.filter.IYandexRaspFilter;
+import com.minakov.yandexraspintegration.controller.graphql.input.filter.IYandexStationFilter;
 import com.minakov.yandexraspintegration.model.CountryEntity_;
-import com.minakov.yandexraspintegration.model.IYandexRaspEntity;
+import com.minakov.yandexraspintegration.model.IYandexStationEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded_;
 import com.minakov.yandexraspintegration.service.filter.AbstractEntitySpecification;
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ import lombok.NonNull;
 import org.springframework.data.util.Pair;
 import org.springframework.lang.Nullable;
 
-public abstract class AbstractYandexRaspEntitySpecification<E extends IYandexRaspEntity, F extends IYandexRaspFilter> extends AbstractEntitySpecification<E, F> {
-    public AbstractYandexRaspEntitySpecification(@Nullable F filter) {
+public abstract class AbstractYandexStationEntitySpecification<E extends IYandexStationEntity, F extends IYandexStationFilter> extends AbstractEntitySpecification<E, F> {
+    public AbstractYandexStationEntitySpecification(@Nullable F filter) {
         super(filter);
     }
 

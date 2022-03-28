@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.feign.dto.yandex.rasp;
+package com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist;
 
 import java.util.List;
 import lombok.Builder;
@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @Builder
 @RequiredArgsConstructor
-public class CountryDto {
+public class RegionDto {
     private final CodeDto codes;
     private final String title;
-    private final List<RegionDto> regions;
+    private final List<SettlementDto> settlements;
 }

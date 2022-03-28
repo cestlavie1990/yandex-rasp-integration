@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.feign;
 
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.StationListDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.StationListDto;
 import lombok.NonNull;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;

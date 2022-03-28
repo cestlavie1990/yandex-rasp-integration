@@ -2,7 +2,7 @@ package com.minakov.yandexraspintegration.controller.graphql.input.region;
 
 import com.minakov.yandexraspintegration.controller.graphql.input.code.CodeFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.country.CountryFilter;
-import com.minakov.yandexraspintegration.controller.graphql.input.filter.IYandexRaspFilter;
+import com.minakov.yandexraspintegration.controller.graphql.input.filter.IYandexStationFilter;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.StringCriteria;
 import com.minakov.yandexraspintegration.controller.graphql.input.filter.UUIDCriteria;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.lang.Nullable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegionFilter implements IYandexRaspFilter {
+public class RegionFilter implements IYandexStationFilter {
     @Nullable
     private UUIDCriteria id;
     @Nullable

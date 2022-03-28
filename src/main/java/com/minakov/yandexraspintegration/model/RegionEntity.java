@@ -32,7 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "region")
-public class RegionEntity extends AbstractAuditEntity implements IYandexRaspEntity {
+public class RegionEntity extends AbstractAuditEntity implements IYandexStationEntity {
     @Id
     @GeneratedValue
     @Column(updatable = false)

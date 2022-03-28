@@ -28,7 +28,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "station")
-public class StationEntity extends AbstractAuditEntity implements IYandexRaspEntity {
+public class StationEntity extends AbstractAuditEntity implements IYandexStationEntity {
     @Id
     @GeneratedValue
     @Column(updatable = false)

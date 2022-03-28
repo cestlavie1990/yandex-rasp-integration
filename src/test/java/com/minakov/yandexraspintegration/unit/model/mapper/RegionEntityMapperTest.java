@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.CodeDto;
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.RegionDto;
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.SettlementDto;
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.StationDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.CodeDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.RegionDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.SettlementDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.StationDto;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
 import com.minakov.yandexraspintegration.model.mapper.RegionEntityMapper;
 import com.minakov.yandexraspintegration.model.mapper.SettlementEntityMapper;

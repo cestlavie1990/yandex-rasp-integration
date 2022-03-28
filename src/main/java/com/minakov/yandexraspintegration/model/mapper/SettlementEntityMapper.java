@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.model.mapper;
 
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.SettlementDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.SettlementDto;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
 import com.minakov.yandexraspintegration.service.IMapper;
 import com.minakov.yandexraspintegration.util.MapperUtils;

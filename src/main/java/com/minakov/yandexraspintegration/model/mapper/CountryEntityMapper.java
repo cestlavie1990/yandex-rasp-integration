@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.model.mapper;
 
-import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.CountryDto;
+import com.minakov.yandexraspintegration.feign.dto.yandex.rasp.stationlist.CountryDto;
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.service.IMapper;
 import com.minakov.yandexraspintegration.util.MapperUtils;
