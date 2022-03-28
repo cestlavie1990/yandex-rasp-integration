@@ -1,0 +1,13 @@
+query getSettlement($id: ID!){
+    settlement(id: $id) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        region {
+            id
+        }
+    }
+}

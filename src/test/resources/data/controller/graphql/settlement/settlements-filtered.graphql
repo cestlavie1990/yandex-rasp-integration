@@ -1,0 +1,13 @@
+query getSettlements($filter: SettlementFilter){
+    settlements(filter: $filter) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        region {
+            id
+        }
+    }
+}

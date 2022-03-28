@@ -1,6 +1,6 @@
 extend type Query {
     settlement(id: ID!): Settlement!
-    settlements: [Settlement!]!
+    settlements(filter: SettlementFilter): [Settlement!]!
 }
 
 type Settlement {
@@ -8,4 +8,11 @@ type Settlement {
     code: Code
     title: String
     region: Region!
+}
+
+input SettlementFilter {
+    id: UUIDCriteria
+    title: StringCriteria
+    code: CodeFilter
+    region: RegionFilter
 }

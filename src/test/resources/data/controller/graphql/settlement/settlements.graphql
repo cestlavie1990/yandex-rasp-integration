@@ -1,0 +1,13 @@
+{
+    settlements {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        region {
+            id
+        }
+    }
+}

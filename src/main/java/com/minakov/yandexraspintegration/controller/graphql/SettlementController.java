@@ -1,8 +1,11 @@
 package com.minakov.yandexraspintegration.controller.graphql;
 
+import com.minakov.yandexraspintegration.controller.RequestHelper;
+import com.minakov.yandexraspintegration.controller.graphql.input.settlement.SettlementFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
 import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
 import com.minakov.yandexraspintegration.service.region.RegionService;
+import com.minakov.yandexraspintegration.service.settlement.SettlementMapper;
 import com.minakov.yandexraspintegration.service.settlement.SettlementService;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +27,8 @@ public class SettlementController {
     private final SettlementService service;
     @NonNull
     private final RegionService regionService;
+    @NonNull
+    private final RequestHelper requestHelper;
 
     @QueryMapping
     public Settlement settlement(@Argument final UUID id) {
@@ -31,8 +36,10 @@ public class SettlementController {
     }
 
     @QueryMapping
-    public List<Settlement> settlements() {
-        return service.getAll();
+    public List<Settlement> settlements(@Argument final Map<String, Object> params) {
+        final var filter = requestHelper.toObject(params, "filter", SettlementFilter.class);
+
+        return service.getAll(filter, SettlementMapper.INSTANCE::map);
     }
 
     @BatchMapping

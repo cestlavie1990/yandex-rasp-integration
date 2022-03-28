@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.service.settlement;
 
+import com.minakov.yandexraspintegration.controller.graphql.input.settlement.SettlementFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
 import com.minakov.yandexraspintegration.exception.SettlementNotFoundException;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class SettlementService extends AbstractEntityService<UUID, Settlement, SettlementEntity, SettlementNotFoundException> {
     @NonNull
     private final SettlementRepository repository;
+
+    @Transactional(readOnly = true)
+    @NonNull
+    public <T> List<T> getAll(@Nullable final SettlementFilter filter,
+            @NonNull final Function<SettlementEntity, T> mapper) {
+        return repository.findAll(new SettlementEntitySpecification(filter))
+                .stream()
+                .map(mapper)
+                .collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     @NonNull
