@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.it.controller.graphql;
+package com.minakov.yandexraspintegration.it.controller.graphql.country;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;

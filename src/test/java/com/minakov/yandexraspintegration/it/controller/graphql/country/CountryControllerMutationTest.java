@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.it.controller.graphql;
+package com.minakov.yandexraspintegration.it.controller.graphql.country;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
