@@ -26,11 +26,11 @@ public class SettlementEntitySpecification extends AbstractYandexRaspEntitySpeci
         if (filter != null) {
             if (filter.getRegion() != null) {
                 final var specification = new RegionEntitySpecification(filter.getRegion());
-                final var countryCriteria = specification.getCriteria(filter.getRegion());
+                final var regionCriteria = specification.getCriteria(filter.getRegion());
 
-                countryCriteria.forEach(c -> c.getSecond().addFirst(SettlementEntity_.region));
+                regionCriteria.forEach(c -> c.getSecond().addFirst(SettlementEntity_.region));
 
-                criteria.addAll(countryCriteria);
+                criteria.addAll(regionCriteria);
             }
         }
 

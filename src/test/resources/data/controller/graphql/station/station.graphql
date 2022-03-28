@@ -1,0 +1,13 @@
+query getStation($id: ID!){
+    station(id: $id) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        settlement {
+            id
+        }
+    }
+}

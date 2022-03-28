@@ -1,0 +1,13 @@
+query getStations($filter: StationFilter){
+    stations(filter: $filter) {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        settlement {
+            id
+        }
+    }
+}

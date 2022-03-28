@@ -1,6 +1,6 @@
 extend type Query {
     station(id: ID!): Station!
-    stations: [Station!]!
+    stations(filter: StationFilter): [Station!]!
 }
 
 type Station {
@@ -13,4 +13,11 @@ type Station {
     stationType: String
     transportType: String
     settlement: Settlement!
+}
+
+input StationFilter {
+    id: UUIDCriteria
+    title: StringCriteria
+    code: CodeFilter
+    settlement: SettlementFilter
 }

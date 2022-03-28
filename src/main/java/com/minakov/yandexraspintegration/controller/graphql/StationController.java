@@ -1,8 +1,11 @@
 package com.minakov.yandexraspintegration.controller.graphql;
 
+import com.minakov.yandexraspintegration.controller.RequestHelper;
+import com.minakov.yandexraspintegration.controller.graphql.input.station.StationFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
 import com.minakov.yandexraspintegration.controller.graphql.type.station.Station;
 import com.minakov.yandexraspintegration.service.settlement.SettlementService;
+import com.minakov.yandexraspintegration.service.station.StationMapper;
 import com.minakov.yandexraspintegration.service.station.StationService;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +27,8 @@ public class StationController {
     private final StationService service;
     @NonNull
     private final SettlementService settlementService;
+    @NonNull
+    private final RequestHelper requestHelper;
 
     @QueryMapping
     public Station station(@Argument final UUID id) {
@@ -31,8 +36,10 @@ public class StationController {
     }
 
     @QueryMapping
-    public List<Station> stations() {
-        return service.getAll();
+    public List<Station> stations(@Argument final Map<String, Object> params) {
+        final var filter = requestHelper.toObject(params, "filter", StationFilter.class);
+
+        return service.getAll(filter, StationMapper.INSTANCE::map);
     }
 
     @BatchMapping

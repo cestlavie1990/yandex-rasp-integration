@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.service.station;
 
+import com.minakov.yandexraspintegration.controller.graphql.input.station.StationFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.station.Station;
 import com.minakov.yandexraspintegration.exception.StationNotFoundException;
 import com.minakov.yandexraspintegration.model.StationEntity;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class StationService extends AbstractEntityService<UUID, Station, StationEntity, StationNotFoundException> {
     @NonNull
     private final StationRepository repository;
+
+    @Transactional(readOnly = true)
+    @NonNull
+    public <T> List<T> getAll(@Nullable final StationFilter filter, @NonNull final Function<StationEntity, T> mapper) {
+        return repository.findAll(new StationEntitySpecification(filter))
+                .stream()
+                .map(mapper)
+                .collect(Collectors.toList());
+    }
 
     @Transactional(readOnly = true)
     @NonNull

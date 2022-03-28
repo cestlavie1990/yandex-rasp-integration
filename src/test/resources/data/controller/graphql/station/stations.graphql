@@ -1,0 +1,13 @@
+{
+    stations {
+        id
+        title
+        code {
+            esrCode
+            yandexCode
+        }
+        settlement {
+            id
+        }
+    }
+}
