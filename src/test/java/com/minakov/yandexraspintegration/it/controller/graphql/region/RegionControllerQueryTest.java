@@ -45,21 +45,34 @@ class RegionControllerQueryTest extends AbstractIT {
 
     @Test
     void getById() {
-        final var id = regionHelper.create();
-        final var title = regionHelper.get(id, RegionEntity::getTitle);
-        final var countryId = Objects.requireNonNull(regionHelper.get(id, RegionEntity::getCountryId));
-        final var settlementId = settlementHelper.create(id);
+        {
+            final var id = regionHelper.create();
+            final var title = regionHelper.get(id, RegionEntity::getTitle);
+            final var countryId = Objects.requireNonNull(regionHelper.get(id, RegionEntity::getCountryId));
+            final var settlementId = settlementHelper.create(id);
 
-        requestHelper.graphql(regionQuery, Map.of("id", id))
-                .statusCode(200)
-                .assertThat()
-                .body("errors", nullValue())
-                .body("data.region.id", equalTo(id.toString()))
-                .body("data.region.title", equalTo(title))
-                .body("data.region.code.esrCode", equalTo(RegionTestHelper.Default.CODE.getEsrCode()))
-                .body("data.region.code.yandexCode", equalTo(RegionTestHelper.Default.CODE.getYandexCode()))
-                .body("data.region.country.id", equalTo(countryId.toString()))
-                .body("data.region.settlements.id", containsInAnyOrder(settlementId.toString()));
+            requestHelper.graphql(regionQuery, Map.of("id", id))
+                    .statusCode(200)
+                    .assertThat()
+                    .body("errors", nullValue())
+                    .body("data.region.id", equalTo(id.toString()))
+                    .body("data.region.title", equalTo(title))
+                    .body("data.region.code.esrCode", equalTo(RegionTestHelper.Default.CODE.getEsrCode()))
+                    .body("data.region.code.yandexCode", equalTo(RegionTestHelper.Default.CODE.getYandexCode()))
+                    .body("data.region.country.id", equalTo(countryId.toString()))
+                    .body("data.region.settlements.id", containsInAnyOrder(settlementId.toString()));
+        }
+
+        {
+            final var id = regionHelper.create();
+
+            requestHelper.graphql(regionQuery, Map.of("id", id))
+                    .statusCode(200)
+                    .assertThat()
+                    .body("errors", nullValue())
+                    .body("data.region.id", equalTo(id.toString()))
+                    .body("data.region.settlements.id", empty());
+        }
     }
 
     @Test

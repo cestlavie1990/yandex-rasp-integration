@@ -8,10 +8,10 @@ import com.minakov.yandexraspintegration.service.country.CountryMapper;
 import com.minakov.yandexraspintegration.service.country.CountryService;
 import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import com.minakov.yandexraspintegration.service.region.RegionService;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +55,10 @@ public class CountryController {
 
         final var regionMap = regionService.getMapByCountryIdIn(countryIds, RegionMapper.INSTANCE::map);
 
+        final var empty = List.<Region>of();
+
         return countries.stream()
-                .collect(HashMap::new, (m, v) -> m.put(v, regionMap.get(UUID.fromString(v.getId()))), HashMap::putAll);
+                .collect(Collectors.toMap(Function.identity(),
+                        v -> regionMap.getOrDefault(UUID.fromString(v.getId()), empty)));
     }
 }

@@ -44,20 +44,33 @@ class CountryControllerQueryTest extends AbstractIT {
 
     @Test
     void getById() {
-        final var id = countryTestHelper.create();
-        final var title = countryTestHelper.get(id, CountryEntity::getTitle);
+        {
+            final var id = countryTestHelper.create();
+            final var title = countryTestHelper.get(id, CountryEntity::getTitle);
 
-        final var regionId = regionTestHelper.create(id);
+            final var regionId = regionTestHelper.create(id);
 
-        requestHelper.graphql(countryQuery, Map.of("id", id))
-                .statusCode(200)
-                .assertThat()
-                .body("errors", nullValue())
-                .body("data.country.id", equalTo(id.toString()))
-                .body("data.country.title", equalTo(title))
-                .body("data.country.code.esrCode", equalTo(CountryTestHelper.Default.CODE.getEsrCode()))
-                .body("data.country.code.yandexCode", equalTo(CountryTestHelper.Default.CODE.getYandexCode()))
-                .body("data.country.regions.id", containsInAnyOrder(regionId.toString()));
+            requestHelper.graphql(countryQuery, Map.of("id", id))
+                    .statusCode(200)
+                    .assertThat()
+                    .body("errors", nullValue())
+                    .body("data.country.id", equalTo(id.toString()))
+                    .body("data.country.title", equalTo(title))
+                    .body("data.country.code.esrCode", equalTo(CountryTestHelper.Default.CODE.getEsrCode()))
+                    .body("data.country.code.yandexCode", equalTo(CountryTestHelper.Default.CODE.getYandexCode()))
+                    .body("data.country.regions.id", containsInAnyOrder(regionId.toString()));
+        }
+
+        {
+            final var id = countryTestHelper.create();
+
+            requestHelper.graphql(countryQuery, Map.of("id", id))
+                    .statusCode(200)
+                    .assertThat()
+                    .body("errors", nullValue())
+                    .body("data.country.id", equalTo(id.toString()))
+                    .body("data.country.regions.id", empty());
+        }
     }
 
     @Test

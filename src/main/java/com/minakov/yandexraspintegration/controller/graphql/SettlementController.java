@@ -64,7 +64,10 @@ public class SettlementController {
 
         final var regionMap = stationService.getMapBySettlementIdIn(settlementIds, StationMapper.INSTANCE::map);
 
+        final var empty = List.<Station>of();
+
         return settlements.stream()
-                .collect(HashMap::new, (m, v) -> m.put(v, regionMap.get(UUID.fromString(v.getId()))), HashMap::putAll);
+                .collect(Collectors.toMap(Function.identity(),
+                        v -> regionMap.getOrDefault(UUID.fromString(v.getId()), empty)));
     }
 }
