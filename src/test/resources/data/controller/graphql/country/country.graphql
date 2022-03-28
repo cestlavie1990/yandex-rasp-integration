@@ -6,5 +6,8 @@ query getCountry($id: ID!){
             esrCode
             yandexCode
         }
+        regions {
+            id
+        }
     }
 }

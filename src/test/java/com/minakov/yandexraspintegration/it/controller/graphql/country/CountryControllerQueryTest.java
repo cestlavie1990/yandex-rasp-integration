@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.it.controller.graphql.country;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -15,12 +16,12 @@ import com.minakov.yandexraspintegration.controller.graphql.input.filter.UUIDCri
 import com.minakov.yandexraspintegration.it.AbstractIT;
 import com.minakov.yandexraspintegration.it.SpringBootIT;
 import com.minakov.yandexraspintegration.it.helper.CountryTestHelper;
+import com.minakov.yandexraspintegration.it.helper.RegionTestHelper;
 import com.minakov.yandexraspintegration.model.CountryEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,20 +39,25 @@ class CountryControllerQueryTest extends AbstractIT {
 
     @Autowired
     private CountryTestHelper countryTestHelper;
+    @Autowired
+    private RegionTestHelper regionTestHelper;
 
     @Test
     void getById() {
-        final var id = countryTestHelper.create().toString();
-        final var title = countryTestHelper.get(UUID.fromString(id), CountryEntity::getTitle);
+        final var id = countryTestHelper.create();
+        final var title = countryTestHelper.get(id, CountryEntity::getTitle);
+
+        final var regionId = regionTestHelper.create(id);
 
         requestHelper.graphql(countryQuery, Map.of("id", id))
                 .statusCode(200)
                 .assertThat()
                 .body("errors", nullValue())
-                .body("data.country.id", equalTo(id))
+                .body("data.country.id", equalTo(id.toString()))
                 .body("data.country.title", equalTo(title))
                 .body("data.country.code.esrCode", equalTo(CountryTestHelper.Default.CODE.getEsrCode()))
-                .body("data.country.code.yandexCode", equalTo(CountryTestHelper.Default.CODE.getYandexCode()));
+                .body("data.country.code.yandexCode", equalTo(CountryTestHelper.Default.CODE.getYandexCode()))
+                .body("data.country.regions.id", containsInAnyOrder(regionId.toString()));
     }
 
     @Test

@@ -21,8 +21,11 @@ public class RegionTestHelper extends AbstractTestHelper<UUID, RegionEntity> {
     @Transactional
     @Override
     public @NonNull UUID create() {
-        final var countryId = countryTestHelper.create();
+        return create(countryTestHelper.create());
+    }
 
+    @Transactional
+    public @NonNull UUID create(@NonNull final UUID countryId) {
         return repository.save(RegionEntity.builder()
                 .country(countryTestHelper.getEntity(countryId))
                 .code(Default.CODE)
