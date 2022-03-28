@@ -8,6 +8,7 @@ type Region {
     code: Code
     title: String
     country: Country!
+    settlements: [Settlement!]!
 }
 
 input RegionFilter {
