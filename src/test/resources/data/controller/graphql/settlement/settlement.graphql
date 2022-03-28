@@ -9,5 +9,8 @@ query getSettlement($id: ID!){
         region {
             id
         }
+        stations {
+            id
+        }
     }
 }

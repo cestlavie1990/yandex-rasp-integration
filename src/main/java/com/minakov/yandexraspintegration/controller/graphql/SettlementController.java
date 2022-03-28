@@ -4,9 +4,12 @@ import com.minakov.yandexraspintegration.controller.RequestHelper;
 import com.minakov.yandexraspintegration.controller.graphql.input.settlement.SettlementFilter;
 import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
 import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
+import com.minakov.yandexraspintegration.controller.graphql.type.station.Station;
 import com.minakov.yandexraspintegration.service.region.RegionService;
 import com.minakov.yandexraspintegration.service.settlement.SettlementMapper;
 import com.minakov.yandexraspintegration.service.settlement.SettlementService;
+import com.minakov.yandexraspintegration.service.station.StationMapper;
+import com.minakov.yandexraspintegration.service.station.StationService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,8 @@ public class SettlementController {
     private final SettlementService service;
     @NonNull
     private final RegionService regionService;
+    @NonNull
+    private final StationService stationService;
     @NonNull
     private final RequestHelper requestHelper;
 
@@ -51,5 +56,15 @@ public class SettlementController {
 
         return settlements.stream()
                 .collect(HashMap::new, (m, v) -> m.put(v, regions.get(v.getRegionId())), HashMap::putAll);
+    }
+
+    @BatchMapping
+    public Map<Settlement, List<Station>> stations(final List<Settlement> settlements) {
+        final var settlementIds = settlements.stream().map(c -> UUID.fromString(c.getId())).collect(Collectors.toSet());
+
+        final var regionMap = stationService.getMapBySettlementIdIn(settlementIds, StationMapper.INSTANCE::map);
+
+        return settlements.stream()
+                .collect(HashMap::new, (m, v) -> m.put(v, regionMap.get(UUID.fromString(v.getId()))), HashMap::putAll);
     }
 }

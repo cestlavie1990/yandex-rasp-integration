@@ -8,6 +8,7 @@ type Settlement {
     code: Code
     title: String
     region: Region!
+    stations: [Station!]!
 }
 
 input SettlementFilter {

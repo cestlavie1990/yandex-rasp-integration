@@ -21,8 +21,11 @@ public class StationTestHelper extends AbstractTestHelper<UUID, StationEntity> {
     @Transactional
     @Override
     public @NonNull UUID create() {
-        final var settlementId = settlementTestHelper.create();
+        return create(settlementTestHelper.create());
+    }
 
+    @Transactional
+    public @NonNull UUID create(@NonNull final UUID settlementId) {
         return repository.save(StationEntity.builder()
                 .settlement(settlementTestHelper.getEntity(settlementId))
                 .code(Default.CODE)

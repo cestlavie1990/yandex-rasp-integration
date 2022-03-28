@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.it.controller.graphql.settlement;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -16,12 +17,12 @@ import com.minakov.yandexraspintegration.controller.graphql.input.settlement.Set
 import com.minakov.yandexraspintegration.it.AbstractIT;
 import com.minakov.yandexraspintegration.it.SpringBootIT;
 import com.minakov.yandexraspintegration.it.helper.SettlementTestHelper;
+import com.minakov.yandexraspintegration.it.helper.StationTestHelper;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,23 +40,26 @@ class SettlementControllerQueryTest extends AbstractIT {
 
     @Autowired
     private SettlementTestHelper settlementHelper;
+    @Autowired
+    private StationTestHelper stationHelper;
 
     @Test
     void getById() {
-        final var id = settlementHelper.create().toString();
-        final var title = settlementHelper.get(UUID.fromString(id), SettlementEntity::getTitle);
-        final var regionId =
-                Objects.requireNonNull(settlementHelper.get(UUID.fromString(id), SettlementEntity::getRegionId));
+        final var id = settlementHelper.create();
+        final var title = settlementHelper.get(id, SettlementEntity::getTitle);
+        final var regionId = Objects.requireNonNull(settlementHelper.get(id, SettlementEntity::getRegionId));
+        final var stationId = stationHelper.create(id);
 
         requestHelper.graphql(settlementQuery, Map.of("id", id))
                 .statusCode(200)
                 .assertThat()
                 .body("errors", nullValue())
-                .body("data.settlement.id", equalTo(id))
+                .body("data.settlement.id", equalTo(id.toString()))
                 .body("data.settlement.title", equalTo(title))
                 .body("data.settlement.code.esrCode", equalTo(SettlementTestHelper.Default.CODE.getEsrCode()))
                 .body("data.settlement.code.yandexCode", equalTo(SettlementTestHelper.Default.CODE.getYandexCode()))
-                .body("data.settlement.region.id", equalTo(regionId.toString()));
+                .body("data.settlement.region.id", equalTo(regionId.toString()))
+                .body("data.settlement.stations.id", containsInAnyOrder(stationId.toString()));
     }
 
     @Test
