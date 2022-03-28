@@ -9,5 +9,8 @@ query getRegion($id: ID!){
         country {
             id
         }
+        settlements {
+            id
+        }
     }
 }

@@ -21,8 +21,15 @@ public class SettlementTestHelper extends AbstractTestHelper<UUID, SettlementEnt
     @Transactional
     @Override
     public @NonNull UUID create() {
-        final var regionId = regionTestHelper.create();
+        return repository.save(SettlementEntity.builder()
+                .region(regionTestHelper.getEntity(regionTestHelper.create()))
+                .code(Default.CODE)
+                .title(Default.TITLE.concat(UUID.randomUUID().toString()))
+                .build()).getId();
+    }
 
+    @Transactional
+    public @NonNull UUID create(@NonNull final UUID regionId) {
         return repository.save(SettlementEntity.builder()
                 .region(regionTestHelper.getEntity(regionId))
                 .code(Default.CODE)

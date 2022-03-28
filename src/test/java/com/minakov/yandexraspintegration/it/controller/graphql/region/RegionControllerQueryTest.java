@@ -1,5 +1,6 @@
 package com.minakov.yandexraspintegration.it.controller.graphql.region;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
@@ -16,12 +17,12 @@ import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionF
 import com.minakov.yandexraspintegration.it.AbstractIT;
 import com.minakov.yandexraspintegration.it.SpringBootIT;
 import com.minakov.yandexraspintegration.it.helper.RegionTestHelper;
+import com.minakov.yandexraspintegration.it.helper.SettlementTestHelper;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.model.embedded.CodeEmbedded;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,22 +40,26 @@ class RegionControllerQueryTest extends AbstractIT {
 
     @Autowired
     private RegionTestHelper regionHelper;
+    @Autowired
+    private SettlementTestHelper settlementHelper;
 
     @Test
     void getById() {
-        final var id = regionHelper.create().toString();
-        final var title = regionHelper.get(UUID.fromString(id), RegionEntity::getTitle);
-        final var countryId = Objects.requireNonNull(regionHelper.get(UUID.fromString(id), RegionEntity::getCountryId));
+        final var id = regionHelper.create();
+        final var title = regionHelper.get(id, RegionEntity::getTitle);
+        final var countryId = Objects.requireNonNull(regionHelper.get(id, RegionEntity::getCountryId));
+        final var settlementId = settlementHelper.create(id);
 
         requestHelper.graphql(regionQuery, Map.of("id", id))
                 .statusCode(200)
                 .assertThat()
                 .body("errors", nullValue())
-                .body("data.region.id", equalTo(id))
+                .body("data.region.id", equalTo(id.toString()))
                 .body("data.region.title", equalTo(title))
                 .body("data.region.code.esrCode", equalTo(RegionTestHelper.Default.CODE.getEsrCode()))
                 .body("data.region.code.yandexCode", equalTo(RegionTestHelper.Default.CODE.getYandexCode()))
-                .body("data.region.country.id", equalTo(countryId.toString()));
+                .body("data.region.country.id", equalTo(countryId.toString()))
+                .body("data.region.settlements.id", containsInAnyOrder(settlementId.toString()));
     }
 
     @Test
