@@ -1,0 +1,100 @@
+{
+  "date": "2017-10-28",
+  "pagination": {
+    "total": 210,
+    "limit": 100,
+    "offset": 0
+  },
+  "station": {
+    "code": "s9600213",
+    "title": "Sheremetievo",
+    "station_type": "airport",
+    "popular_title": "popular_title",
+    "short_title": "short_title",
+    "transport_type": "train",
+    "type": "station"
+  },
+  "schedule": [
+    {
+      "except_days": "6, 7, 8, 9, 13, 14 february",
+      "arrival": "2017-02-27T00:04:00+03:00",
+      "thread": {
+        "uid": "7303A_9600213_g13_af",
+        "title": "airport Sheremetievo - Moscow",
+        "number": "7303",
+        "short_title": "a/p Sheremetievo - Moscow",
+        "carrier": {
+          "code": 153,
+          "codes": {
+            "icao": "icao",
+            "sirena": "sirena",
+            "iata": "iata"
+          },
+          "title": "Central Suburban Passenger Company"
+        },
+        "transport_type": "suburban",
+        "vehicle": "vehicle",
+        "transport_subtype": {
+          "color": "#FF7F44",
+          "code": "suburban",
+          "title": "Suburban train"
+        },
+        "express_type": "aeroexpress"
+      },
+      "is_fuzzy": false,
+      "days": "everyday",
+      "stops": "without stops",
+      "departure": "2017-02-27T00:05:00+03:00",
+      "terminal": "A2",
+      "platform": "P1"
+    }
+  ],
+  "interval_schedule": [
+    {
+      "except_days": null,
+      "thread": {
+        "uid": "502-*28mxt*29_0_f9744758t9744460_r2531_1",
+        "title": "Moscow (м. Medvedkovo) — s.Pirigivskiy",
+        "interval": {
+          "density": "маршрутное такси раз в 15-30 минут",
+          "end_time": "2017-07-10T21:30:00",
+          "begin_time": "2017-07-10T06:00:00"
+        },
+        "number": "502",
+        "short_title": "Moscow (м. Medvedkovo) — s.Pirigivskiy1",
+        "carrier": null,
+        "transport_type": "bus",
+        "vehicle": null,
+        "transport_subtype": {
+          "color": "#ff0000",
+          "code": "bus",
+          "title": "Bus"
+        },
+        "express_type": null
+      },
+      "is_fuzzy": false,
+      "days": "everyday",
+      "stops": "",
+      "terminal": null,
+      "platform": ""
+    }
+  ],
+  "schedule_direction": {
+    "code": "to Moscow",
+    "title": "To Moscow"
+  },
+  "directions": [
+    {
+      "code": "arrival",
+      "title": "Arrival"
+    },
+    {
+      "code": "to Moscow",
+      "title": "To Moscow"
+    },
+    {
+      "code": "all",
+      "title": "All directions"
+    }
+  ]
+}

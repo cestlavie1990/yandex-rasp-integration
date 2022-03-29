@@ -20,11 +20,13 @@ public class ThreadDto {
     @Nullable
     private final CarrierDto carrier;
     @Nullable
+    private final IntervalDto interval;
+    @Nullable
     private final String transportType;
     @Nullable
     private final String vehicle;
     @Nullable
-    private final String transportSubtype;
+    private final TransportSubtypeDto transportSubtype;
     @Nullable
     private final String expressType;
 }
