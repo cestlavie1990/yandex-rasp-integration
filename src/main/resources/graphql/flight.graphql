@@ -1,0 +1,26 @@
+extend type Query {
+    flights: [Flight!]!
+}
+
+type Flight {
+    uid: ID!
+    title: String
+    number: String
+    vehicle: String
+    terminal: String
+    platform: String
+    arrival: DateTime
+    departure: DateTime
+    transportType: TransportType
+    airline: Airline
+    isFuzzy: Boolean
+}
+
+interface IScheduledObject {
+    uid: ID!
+    title: String
+    arrival: DateTime
+    departure: DateTime
+    transportType: TransportType
+    isFuzzy: Boolean
+}

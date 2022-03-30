@@ -1,0 +1,8 @@
+enum TransportType {
+    PLANE,
+    TRAIN,
+    SUBURBAN,
+    BUS,
+    WATER,
+    HELICOPTER
+}

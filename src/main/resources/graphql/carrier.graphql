@@ -1,0 +1,15 @@
+interface ICarrier {
+    code: Int
+    name: String
+    iataCode: String
+    icaoCode: String
+    sirenaCode: String
+}
+
+type Airline implements ICarrier {
+    code: Int
+    name: String
+    iataCode: String
+    icaoCode: String
+    sirenaCode: String
+}
