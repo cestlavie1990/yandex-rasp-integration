@@ -1,10 +1,10 @@
-package com.minakov.yandexraspintegration.controller.graphql;
+package com.minakov.yandexraspintegration.controller;
 
-import com.minakov.yandexraspintegration.controller.RequestHelper;
+import com.minakov.yandexraspintegration.controller.helper.RequestHelper;
 import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionFilter;
-import com.minakov.yandexraspintegration.controller.graphql.type.country.Country;
-import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
-import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.country.Country;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.region.Region;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.settlement.Settlement;
 import com.minakov.yandexraspintegration.service.country.CountryService;
 import com.minakov.yandexraspintegration.service.region.RegionMapper;
 import com.minakov.yandexraspintegration.service.region.RegionService;

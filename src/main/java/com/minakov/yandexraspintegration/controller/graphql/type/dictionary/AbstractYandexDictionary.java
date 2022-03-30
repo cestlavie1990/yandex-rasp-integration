@@ -1,6 +1,7 @@
-package com.minakov.yandexraspintegration.controller.graphql.type;
+package com.minakov.yandexraspintegration.controller.graphql.type.dictionary;
 
-import com.minakov.yandexraspintegration.controller.graphql.type.code.Code;
+import com.minakov.yandexraspintegration.controller.graphql.type.IGraphQLType;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.code.Code;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -10,7 +11,7 @@ import org.springframework.lang.Nullable;
 @Getter
 @SuperBuilder
 @EqualsAndHashCode
-public abstract class AbstractYandexRasp<ID> implements IGraphQLType {
+public abstract class AbstractYandexDictionary<ID> implements IGraphQLType {
     @NonNull
     private final ID id;
     @Nullable

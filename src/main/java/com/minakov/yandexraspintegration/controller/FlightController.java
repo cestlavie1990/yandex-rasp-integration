@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.controller.graphql;
+package com.minakov.yandexraspintegration.controller;
 
 import com.minakov.yandexraspintegration.controller.graphql.type.schedule.flight.Flight;
 import java.util.List;

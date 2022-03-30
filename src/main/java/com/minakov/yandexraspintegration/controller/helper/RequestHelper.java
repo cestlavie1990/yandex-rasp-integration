@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.controller;
+package com.minakov.yandexraspintegration.controller.helper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;

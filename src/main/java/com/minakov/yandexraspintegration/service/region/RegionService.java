@@ -1,7 +1,7 @@
 package com.minakov.yandexraspintegration.service.region;
 
 import com.minakov.yandexraspintegration.controller.graphql.input.region.RegionFilter;
-import com.minakov.yandexraspintegration.controller.graphql.type.region.Region;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.region.Region;
 import com.minakov.yandexraspintegration.exception.RegionNotFoundException;
 import com.minakov.yandexraspintegration.model.RegionEntity;
 import com.minakov.yandexraspintegration.repository.GenericRepository;

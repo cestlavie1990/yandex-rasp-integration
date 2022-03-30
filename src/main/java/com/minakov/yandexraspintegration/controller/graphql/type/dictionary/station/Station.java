@@ -1,6 +1,6 @@
-package com.minakov.yandexraspintegration.controller.graphql.type.station;
+package com.minakov.yandexraspintegration.controller.graphql.type.dictionary.station;
 
-import com.minakov.yandexraspintegration.controller.graphql.type.AbstractYandexRasp;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.AbstractYandexDictionary;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -10,7 +10,7 @@ import org.springframework.lang.Nullable;
 @Getter
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class Station extends AbstractYandexRasp<String> {
+public class Station extends AbstractYandexDictionary<String> {
     @NonNull
     private final String settlementId;
     @Nullable

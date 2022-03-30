@@ -1,4 +1,4 @@
-package com.minakov.yandexraspintegration.controller.graphql.type.code;
+package com.minakov.yandexraspintegration.controller.graphql.type.dictionary.code;
 
 import com.minakov.yandexraspintegration.controller.graphql.type.IGraphQLType;
 import lombok.Builder;

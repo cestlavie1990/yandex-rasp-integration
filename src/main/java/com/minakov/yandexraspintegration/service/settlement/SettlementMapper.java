@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.service.settlement;
 
-import com.minakov.yandexraspintegration.controller.graphql.type.settlement.Settlement;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.settlement.Settlement;
 import com.minakov.yandexraspintegration.model.SettlementEntity;
 import com.minakov.yandexraspintegration.service.IMapper;
 import org.mapstruct.Mapper;

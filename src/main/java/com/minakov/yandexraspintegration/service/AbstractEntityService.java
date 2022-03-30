@@ -1,6 +1,6 @@
 package com.minakov.yandexraspintegration.service;
 
-import com.minakov.yandexraspintegration.controller.graphql.type.AbstractYandexRasp;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.AbstractYandexDictionary;
 import com.minakov.yandexraspintegration.exception.ObjectNotFoundException;
 import com.minakov.yandexraspintegration.model.IEntity;
 import com.minakov.yandexraspintegration.repository.GenericRepository;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class AbstractEntityService<ID, D extends AbstractYandexRasp<?>, E extends IEntity<ID>, X extends ObjectNotFoundException> implements IEntityService<ID, D, E> {
+public abstract class AbstractEntityService<ID, D extends AbstractYandexDictionary<?>, E extends IEntity<ID>, X extends ObjectNotFoundException> implements IEntityService<ID, D, E> {
     protected abstract @NonNull GenericRepository<E, ID> getRepository();
 
     protected abstract @NonNull Function<ID, X> getNoEntityError();

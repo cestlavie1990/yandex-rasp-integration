@@ -2,7 +2,7 @@ package com.minakov.yandexraspintegration.service.country;
 
 import com.minakov.yandexraspintegration.config.properties.YandexRaspProperties;
 import com.minakov.yandexraspintegration.controller.graphql.input.country.CountryFilter;
-import com.minakov.yandexraspintegration.controller.graphql.type.country.Country;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.country.Country;
 import com.minakov.yandexraspintegration.exception.CountryNotFoundException;
 import com.minakov.yandexraspintegration.feign.YandexRaspClient;
 import com.minakov.yandexraspintegration.model.CountryEntity;

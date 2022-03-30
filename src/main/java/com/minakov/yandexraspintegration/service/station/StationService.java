@@ -1,7 +1,7 @@
 package com.minakov.yandexraspintegration.service.station;
 
 import com.minakov.yandexraspintegration.controller.graphql.input.station.StationFilter;
-import com.minakov.yandexraspintegration.controller.graphql.type.station.Station;
+import com.minakov.yandexraspintegration.controller.graphql.type.dictionary.station.Station;
 import com.minakov.yandexraspintegration.exception.StationNotFoundException;
 import com.minakov.yandexraspintegration.model.StationEntity;
 import com.minakov.yandexraspintegration.repository.GenericRepository;
