@@ -5,12 +5,14 @@ import com.minakov.yandexraspintegration.controller.graphql.type.schedule.Transp
 import com.minakov.yandexraspintegration.controller.graphql.type.schedule.carrier.Airline;
 import java.time.OffsetDateTime;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import org.springframework.lang.Nullable;
 
 @Getter
 @Builder
+@EqualsAndHashCode
 public class Flight implements IScheduledObject {
     @NonNull
     private final String uid;
