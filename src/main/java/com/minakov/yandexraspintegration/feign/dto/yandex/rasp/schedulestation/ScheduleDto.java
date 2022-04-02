@@ -3,6 +3,7 @@ package com.minakov.yandexraspintegration.feign.dto.yandex.rasp.schedulestation;
 import java.time.OffsetDateTime;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 
@@ -14,7 +15,7 @@ public class ScheduleDto {
     private final OffsetDateTime arrival;
     @Nullable
     private final OffsetDateTime departure;
-    @Nullable
+    @NonNull
     private final ThreadDto thread;
     @Nullable
     private final Boolean isFuzzy;

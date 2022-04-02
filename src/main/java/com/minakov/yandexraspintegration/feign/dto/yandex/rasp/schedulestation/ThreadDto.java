@@ -2,6 +2,7 @@ package com.minakov.yandexraspintegration.feign.dto.yandex.rasp.schedulestation;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
 
@@ -9,7 +10,7 @@ import org.springframework.lang.Nullable;
 @Builder
 @RequiredArgsConstructor
 public class ThreadDto {
-    @Nullable
+    @NonNull
     private final String uid;
     @Nullable
     private final String title;
